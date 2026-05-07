@@ -1,0 +1,2193 @@
+/* Miryam Barovero — variables y reset (paleta diseño) */
+
+@font-face {
+  font-family: "Libre Franklin";
+  src: url("../tipografias/Libre%20Franklin/libre-franklin.medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Franklin";
+  src: url("../tipografias/Libre%20Franklin/libre-franklin.medium-italic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Franklin";
+  src: url("../tipografias/Libre%20Franklin/libre-franklin.semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Franklin";
+  src: url("../tipografias/Libre%20Franklin/libre-franklin.bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Luckiest Guy";
+  src: url("../tipografias/LuckiestGuy-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Marca — naranja guía */
+  --color-orange: #d6360e;
+  --color-orange-dark: hsl(8, 84%, 48%);
+  --color-orange-rgb: 235, 93, 39;
+  /* Barra de navegación — naranjas más vivos, texto en negrita */
+  --color-nav-link: #f0784a;
+  --color-nav-link-hover: #eb5d27;
+  --color-nav-active: #c73e12;
+  --color-nav-accent-strip: #bfe8f2;
+  --color-nav-border: #2a2a2a;
+
+  --color-green: #2d4635;
+  --color-green-hover: #24382a;
+  --color-navy: #1a2744;
+  --color-text: #3a342f;
+  --color-text-muted: #5c534c;
+  --color-cream: #faf8f5;
+  --color-peach: #f5e6dc;
+  --color-peach-deep: #efd6c8;
+  /* Título contacto: naranja muy vivo (referencia maqueta) */
+  --color-orange-contact-loud: #ff5a0f;
+  --header-h: 96px;
+  --radius-pill: 9999px;
+  --radius-field: 22px;
+  --shadow-soft: 0 12px 40px rgba(26, 39, 68, 0.08);
+  --font-body: "Libre Franklin", system-ui, sans-serif;
+  --font-display: "Luckiest Guy", "Libre Franklin", system-ui, sans-serif;
+
+  /* Guía tipográfica (referencia pt → uso web con clamp) */
+  --fs-titulo-1: clamp(2.75rem, 8vw, 5.85rem); /* Luckiest Guy 70pt */
+  --fs-titulo-2: clamp(1.5rem, 4.5vw, 3rem); /* Luckiest Guy 36pt → ~48px máx. */
+  --fs-titulo-3: clamp(1.5rem, 4vw, 3.75rem); /* Libre Franklin Medium 45pt → ~60px máx. */
+  --fs-subtitulo: clamp(1.1rem, 2.4vw, 2.5rem); /* Libre Franklin Bold 30pt → ~40px máx. */
+  --fs-texto-1: clamp(1.1rem, 2vw, 1.875rem); /* Libre Franklin Medium 30pt */
+  --fs-texto-2: clamp(0.95rem, 1.6vw, 1.25rem); /* Libre Franklin Medium 20pt */
+  --fs-nav: clamp(0.875rem, 1.45vw, 1.1rem); /* Menú caps, un poco más grande */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--color-text);
+  background: #fff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.messages-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem clamp(1rem, 4vw, 1.5rem);
+  box-sizing: border-box;
+}
+
+/* ——— Header ——— */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-top: none;
+  border-bottom: 1px solid rgba(42, 42, 42, 0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+/* Franja superior cian (maqueta) */
+.site-header::before {
+  content: "";
+  display: block;
+  height: 5px;
+  background: var(--color-nav-accent-strip);
+}
+
+.site-header.is-scrolled {
+  box-shadow: var(--shadow-soft);
+}
+
+/* Ancho completo: logo al borde izquierdo y menú al derecho (no bloque centrado) */
+.header-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 clamp(1.85rem, 5vw, 3.75rem);
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.logo-img {
+  width: 86px;
+  height: 86px;
+  border-radius: 0;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  display: block;
+}
+
+.nav-main {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  gap: 0.25rem;
+}
+
+.nav-main ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem clamp(0.5rem, 2.2vw, 1.65rem);
+}
+
+.nav-main a {
+  display: block;
+  padding: 0.5rem 0.35rem;
+  font-family: var(--font-body);
+  font-size: var(--fs-nav);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-nav-link);
+  border-radius: 4px;
+  transition: color 0.18s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav-main a:hover {
+  color: var(--color-nav-link-hover);
+  font-weight: 700;
+}
+
+.nav-main a.is-active {
+  color: var(--color-nav-active);
+  font-weight: 700;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--color-nav-active);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.hamburger.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-main {
+    position: fixed;
+    inset: var(--header-h) 0 auto 0;
+    background: #fff;
+    border-bottom: 1px solid rgba(26, 39, 68, 0.08);
+    padding: 1rem 1.5rem 1.25rem;
+    flex-direction: column;
+    align-items: stretch;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    max-height: min(70vh, calc(100vh - var(--header-h) - 8px));
+    max-height: min(70vh, calc(100dvh - var(--header-h) - 8px));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .nav-main.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-main ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .nav-main a {
+    padding: 0.75rem 0;
+    font-size: var(--fs-nav);
+    font-weight: 700;
+    color: var(--color-nav-link);
+    border-bottom: 1px solid rgba(var(--color-orange-rgb), 0.12);
+  }
+
+  .nav-main a.is-active {
+    color: var(--color-nav-active);
+    font-weight: 700;
+  }
+}
+
+/* ——— Botones ——— */
+
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.75rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--color-green);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-pill:hover {
+  background: var(--color-green-hover);
+}
+
+.btn-pill:active {
+  transform: scale(0.98);
+}
+
+/* ——— Inicio: Hero ——— */
+
+.hero-miryam {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: min(90vh, 800px);
+  display: block;
+  isolation: isolate;
+  padding: clamp(3rem, 10vh, 5rem) clamp(1.25rem, 4vw, 2.5rem);
+  overflow: hidden;
+}
+
+.hero-miryam__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: center / cover no-repeat url("../1x/Recurso%201.png");
+}
+
+/* Naranja uniforme (marca), sin degradado — encima de la foto, debajo del texto */
+.hero-miryam__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(var(--color-orange-rgb), 0.38);
+  pointer-events: none;
+}
+
+/*
+  Bloque del hero: centrado con leve corrección a la izquierda (~15% del ancho
+  del contenedor) para alinear mejor con la composición de la foto.
+*/
+.hero-miryam__inner {
+  position: absolute;
+  left: calc(50% - 15%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: -moz-fit-content;
+  width: fit-content;
+  min-width: 0;
+  max-width: min(52rem, calc(100% - 2.5rem));
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero-miryam__kicker {
+  font-family: var(--font-body);
+  font-size: clamp(1.59rem, 3.5vw, 2.56rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #fff;
+  margin: 0 0 0.45rem;
+  line-height: 1.2;
+  text-align: left;
+}
+
+.hero-miryam__title {
+  margin: 0 0 0.18rem;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.56rem, 7.65vw, 5.75rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: left;
+}
+
+@media (min-width: 720px) {
+  .hero-miryam__title {
+    white-space: nowrap;
+  }
+}
+
+.hero-miryam__subtitle {
+  margin: 0;
+  max-width: 100%;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.05rem, 3.8vw, 2.375rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.015em;
+  color: #fff;
+  text-align: left;
+}
+
+/* Hero Eneagrama — titular una línea (ref.); subtítulo una línea en desktop ancho */
+.hero-eneagrama__title {
+  margin: 0 0 clamp(1rem, 2.5vw, 1.45rem);
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.85vw + 0.85rem, 5.65rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.032em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  text-shadow:
+    0.5px 0 0 rgba(255, 255, 255, 0.95),
+    -0.5px 0 0 rgba(255, 255, 255, 0.95),
+    0 0.5px 0 rgba(255, 255, 255, 0.95),
+    0 -0.5px 0 rgba(255, 255, 255, 0.95),
+    0 3px 32px rgba(0, 0, 0, 0.38),
+    0 1px 8px rgba(0, 0, 0, 0.28);
+}
+
+@media (min-width: 681px) {
+  .hero-eneagrama__title {
+    white-space: nowrap;
+  }
+}
+
+.hero-eneagrama__subtitle {
+  margin: 0;
+  max-width: min(52rem, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 0.25rem;
+  font-family: var(--font-display);
+  font-size: 22pt;
+  font-weight: 400;
+  line-height: 1.22;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #fff;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.24);
+}
+
+@media (min-width: 960px) {
+  .hero-eneagrama__subtitle {
+    white-space: nowrap;
+    max-width: none;
+  }
+}
+
+@media (min-width: 720px) {
+  .hero-miryam__subtitle {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-miryam {
+    min-height: min(88vh, 780px);
+    min-height: min(88svh, 780px);
+    padding: clamp(2rem, 7vh, 3.5rem) clamp(1rem, 4vw, 1.35rem);
+  }
+
+  .hero-miryam__inner {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    text-align: center;
+    max-width: min(36rem, calc(100vw - 1.75rem));
+  }
+
+  .hero-miryam__kicker,
+  .hero-miryam__title,
+  .hero-miryam__subtitle {
+    text-align: center;
+  }
+
+  .hero-miryam__title {
+    white-space: normal;
+  }
+
+  .hero-miryam__subtitle {
+    white-space: normal;
+  }
+
+  .hero-eneagrama__subtitle {
+    white-space: normal;
+  }
+}
+
+/* ——— Mi método ——— */
+
+.section-mi-metodo {
+  position: relative;
+  /* Banda superior + padding; sin banda inferior (evita franja naranja sobre el blog) */
+  padding: calc(52px + clamp(3.25rem, 9vw, 5.5rem)) 1.5rem clamp(3.25rem, 8vw, 5.25rem);
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Banda superior: textura (Recurso 1) + velo naranja */
+.section-mi-metodo__strip--top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  z-index: 1;
+  pointer-events: none;
+  background-image: linear-gradient(
+      rgba(235, 93, 39, 0.52),
+      rgba(235, 93, 39, 0.52)
+    ),
+    url("../1x/Recurso%201.png");
+  background-size: 100% 100%, cover;
+  background-position: center, center 35%;
+  background-repeat: no-repeat;
+}
+
+/* Recurso 3: gráfico en la esquina inferior izquierda del PNG (no salir del overflow) */
+.section-mi-metodo__watermark--r3 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: min(58vw, 520px);
+  height: min(52vw, 460px);
+  max-height: calc(100% - 52px - 8rem);
+  z-index: 0;
+  pointer-events: none;
+  background: left bottom / contain no-repeat url("../1x/Recurso%203.png");
+  opacity: 0.44;
+}
+
+/*
+  Recurso 2: el dibujo está en el LADO DERECHO del PNG; con right negativo
+  overflow:hidden recortaba todo el gráfico. Anclamos al borde derecho.
+*/
+.section-mi-metodo__watermark--r2 {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  width: min(62vw, 560px);
+  height: min(62vw, 560px);
+  max-height: calc(100% - 52px - 4rem);
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("../1x/Recurso%202.png");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+  opacity: 0.48;
+}
+
+.section-mi-metodo__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-title {
+  margin: 0 0 70px;
+  font-family: var(--font-body);
+  font-size: var(--fs-subtitulo);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-orange);
+}
+
+/* Inicio — bloque “Mi método”: titular display naranja, jerarquía como guía */
+.section-mi-metodo .section-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.28rem, 5.5vw, 3.55rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #eb5d27;
+}
+
+.section-mi-metodo__lead {
+  margin: 0 0 1.35rem;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.18rem, 2.35vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--color-navy);
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 0.35px 0 0 currentColor, -0.35px 0 0 currentColor;
+}
+
+.section-mi-metodo__list {
+  margin: 0 0 2.25rem;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.section-mi-metodo__list li {
+  position: relative;
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.04rem, 1.9vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+}
+
+.section-mi-metodo__list li:last-child {
+  margin-bottom: 0;
+}
+
+.section-mi-metodo__list li::before {
+  content: "·";
+  display: inline;
+  margin-right: 0.4rem;
+  color: #eb5d27;
+  font-weight: 700;
+}
+
+.section-mi-metodo__cta {
+  display: flex;
+  justify-content: center;
+}
+
+.section-mi-metodo__cta .btn-pill {
+  font-size: clamp(0.9rem, 1.55vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  padding: 1.1rem 2.25rem;
+}
+
+/* ——— Blog CTA: fondo Recurso 5 + bloque de copy a la derecha (maqueta) ——— */
+
+.section-blog-cta {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 1.05fr);
+  align-items: center;
+  min-height: min(480px, 64vw);
+  margin-top: 0;
+  padding: clamp(3.25rem, 8vw, 5.5rem) clamp(1rem, 3.5vw, 2.75rem) clamp(3.5rem, 8vw, 5.75rem);
+}
+
+.section-blog-cta__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: center / cover no-repeat url("../1x/Recurso%205.png");
+}
+
+.section-blog-cta__inner {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: start;
+  align-self: center;
+  max-width: min(100%, 36rem);
+  margin: 0;
+  padding-left: 0.35rem;
+  text-align: left;
+}
+
+/* Título: Luckiest Guy Regular (~32pt máx., un poco menor que la guía 36pt) */
+.section-blog-cta__inner h2 {
+  margin: 0 0 0.9rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3.75vw, 32pt);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3a2822;
+  line-height: 1.06;
+}
+
+.section-blog-cta__inner p {
+  margin: 0 0 1.5rem;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.02rem, 2.85vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.45;
+  color: #4a332d;
+}
+
+.section-blog-cta__inner .btn-pill {
+  font-size: clamp(0.82rem, 1.3vw, 0.95rem);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  padding: 1.05rem 2.1rem;
+}
+
+/* ——— Sobre Miryam (sigue al blog CTA) ——— */
+
+.section-sobre-miryam {
+  background: #fff;
+  overflow-x: clip;
+  padding-top: clamp(2rem, 5.25vw, 3.5rem);
+  padding-bottom: clamp(4.25rem, 10.5vw, 7.25rem);
+  padding-left: clamp(1.75rem, 6vw, 5rem);
+  padding-right: clamp(1.75rem, 6vw, 5rem);
+}
+
+.section-sobre-miryam__inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 1.08fr);
+  gap: 0;
+  align-items: center;
+}
+
+.section-sobre-miryam__text {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  /* Se superpone un poco al óvalo / halo (referencia de diseño) */
+  margin-right: clamp(-3rem, -3.5vw, -0.5rem);
+  padding-right: clamp(0.25rem, 2vw, 1.25rem);
+}
+
+.section-sobre-miryam__visual {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  margin-left: clamp(-4.5rem, -5.5vw, -2.5rem);
+}
+
+.section-sobre-miryam__title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.05rem, 4.6vw, 3.55rem);
+  font-weight: 400;
+  letter-spacing: 0.038em;
+  text-transform: uppercase;
+  color: #eb5d27;
+  line-height: 1.04;
+}
+
+.section-sobre-miryam__role {
+  margin: 0 0 1.75rem;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: clamp(1.2rem, 2.65vw, 1.85rem);
+  font-weight: 400;
+  color: #3a2822;
+  line-height: 1.34;
+}
+
+.section-sobre-miryam__body {
+  margin-bottom: 2.1rem;
+}
+
+.section-sobre-miryam__body p {
+  margin: 0 0 1.15rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.94rem, 1.45vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.62;
+  color: var(--color-text-muted);
+}
+
+.section-sobre-miryam__body p:last-child {
+  margin-bottom: 0;
+}
+
+.section-sobre-miryam__cta {
+  display: inline-flex;
+  font-size: clamp(0.82rem, 1.25vw, 0.95rem);
+  letter-spacing: 0.09em;
+  padding: 1.15rem 2.35rem;
+}
+
+/* Recurso 6 ya trae el círculo + halo: no recortar ni sumar sombra fuerte */
+.section-sobre-miryam__photo-wrap {
+  width: min(100%, 884px);
+  margin: 0;
+  overflow: visible;
+  line-height: 0;
+}
+
+.section-sobre-miryam__photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ——— Contacto: fondo Recurso 7 + formulario ——— */
+
+.section-contacto {
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: calc(var(--header-h) + 12px);
+  padding: clamp(4.25rem, 11vw, 8rem) clamp(1.5rem, 5vw, 3.5rem)
+    clamp(5rem, 12vw, 9.25rem);
+}
+
+.section-contacto__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: center / cover no-repeat url("../1x/Recurso%207.png");
+  pointer-events: none;
+}
+
+.section-contacto__inner {
+  position: relative;
+  z-index: 1;
+  max-width: min(52rem, 100%);
+  margin: 0 auto;
+}
+
+.section-contacto__title {
+  margin: 0 0 clamp(2.25rem, 5vw, 3.25rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 4.25vw, 2.85rem);
+  font-weight: 400;
+  letter-spacing: 0.038em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-orange-contact-loud);
+  line-height: 1.06;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.section-contacto__form {
+  margin: 0;
+}
+
+.section-contacto__row {
+  margin-bottom: clamp(1.2rem, 2.75vw, 1.75rem);
+}
+
+.section-contacto__row--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.85rem, 2.2vw, 1.35rem);
+}
+
+.section-contacto__wrap {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 1.82rem 1.15rem 1rem;
+  border: 2px solid var(--color-green);
+  border-radius: 12px;
+  background: #fff;
+  cursor: text;
+}
+
+.section-contacto__wrap--textarea {
+  padding-top: 1.78rem;
+  padding-bottom: 1.05rem;
+}
+
+.section-contacto__lab {
+  position: absolute;
+  top: 0.52rem;
+  left: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  pointer-events: none;
+  -webkit-font-smoothing: antialiased;
+  /* Negrita sólida / más “rellena” (cruces finas como en Mi método) */
+  text-shadow:
+    0.35px 0 0 currentColor,
+    -0.35px 0 0 currentColor,
+    0.35px 0.35px 0 currentColor,
+    -0.35px -0.35px 0 currentColor;
+}
+
+.section-contacto__control {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.45vw, 1.18rem);
+  font-weight: 500;
+  color: var(--color-text);
+  background: transparent;
+  line-height: 1.45;
+}
+
+.section-contacto__wrap:not(.section-contacto__wrap--textarea) .section-contacto__control {
+  min-height: 2.85rem;
+}
+
+.section-contacto__textarea {
+  min-height: clamp(16.5rem, 30vh, 24rem);
+  resize: vertical;
+  line-height: 1.58;
+}
+
+.section-contacto__wrap:focus-within {
+  border-color: var(--color-green-hover);
+  box-shadow: 0 0 0 1px rgba(45, 70, 53, 0.25);
+}
+
+.section-contacto__actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: clamp(1.35rem, 3vw, 1.85rem);
+}
+
+.section-contacto__submit {
+  min-width: 10rem;
+  padding: 1.08rem 2.45rem;
+  font-size: clamp(0.82rem, 1.35vw, 0.95rem);
+  letter-spacing: 0.1em;
+}
+
+/* ——— Página Contactame (mismo fondo Recurso 7 que contacto en inicio) ——— */
+
+.section-contactame {
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: calc(var(--header-h) + 12px);
+  padding: clamp(3.75rem, 10vw, 6.75rem) clamp(1.25rem, 4vw, 2.25rem)
+    clamp(4.25rem, 10vw, 7.5rem);
+}
+
+.section-contactame__inner {
+  position: relative;
+  z-index: 1;
+  max-width: min(52rem, 100%);
+  margin: 0 auto;
+}
+
+.section-contactame__title {
+  margin: 0 0 clamp(1.35rem, 3.5vw, 2rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 4.8vw, 3.15rem);
+  font-weight: 400;
+  letter-spacing: 0.036em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #eb5d27;
+  line-height: 1.06;
+}
+
+.section-contactame__lead {
+  margin: 0 auto clamp(2.25rem, 5vw, 3.25rem);
+  max-width: 38rem;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.02rem, 2.2vw, 1.22rem);
+  font-weight: 500;
+  line-height: 1.58;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.section-contactame__form {
+  margin: 0;
+}
+
+/* Blog CTA: una columna antes de que el grid de dos quede demasiado apretado */
+@media (max-width: 900px) {
+  .section-blog-cta {
+    grid-template-columns: 1fr;
+    min-height: min(380px, 72vw);
+    padding: clamp(2.5rem, 8vw, 4rem) clamp(1rem, 4vw, 2rem)
+      clamp(2.75rem, 8vw, 4.5rem);
+  }
+
+  .section-blog-cta__inner {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: center;
+    text-align: center;
+    max-width: min(100%, 34rem);
+    padding-left: 0;
+  }
+
+  .section-blog-cta__inner h2 {
+    line-height: 1.12;
+    overflow-wrap: anywhere;
+  }
+
+  .section-blog-cta__inner p {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Sobre Miryam: columna única en tablet (evita solape y scroll horizontal) */
+@media (max-width: 960px) {
+  .section-sobre-miryam__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .section-sobre-miryam__text {
+    text-align: center;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .section-sobre-miryam__visual {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .section-sobre-miryam__cta {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-sobre-miryam__photo-wrap {
+    width: min(92vw, 520px);
+  }
+}
+
+@media (max-width: 768px) {
+  .section-mi-metodo {
+    padding: calc(44px + 3.25rem) 1.25rem 3.25rem;
+  }
+
+  .section-mi-metodo__strip--top {
+    height: 44px;
+  }
+
+  .section-mi-metodo__watermark--r3 {
+    bottom: 0;
+    width: min(78vw, 340px);
+    height: min(68vw, 300px);
+    opacity: 0.4;
+  }
+
+  .section-mi-metodo__watermark--r2 {
+    top: 44px;
+    width: min(82vw, 360px);
+    height: min(82vw, 360px);
+    opacity: 0.44;
+  }
+
+  .section-title {
+    margin-bottom: 48px;
+  }
+
+  .section-mi-metodo .section-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .section-mi-metodo__list {
+    margin-bottom: 1.75rem;
+  }
+
+  .section-sobre-miryam__photo-wrap {
+    width: min(94vw, 480px);
+  }
+
+  .section-contacto {
+    padding: clamp(2.75rem, 9vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)
+      clamp(3.25rem, 10vw, 6.5rem);
+  }
+
+  .section-contactame {
+    padding: clamp(2.75rem, 9vw, 5.25rem) clamp(1rem, 4vw, 1.5rem)
+      clamp(3.25rem, 10vw, 6.5rem);
+  }
+
+  .section-contacto__title {
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+
+  .section-contactame__title {
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+
+  .section-contactame__lead {
+    overflow-wrap: anywhere;
+  }
+
+  .section-contacto__textarea {
+    min-height: clamp(13.5rem, 36vh, 20rem);
+  }
+
+  .section-contacto__row--split {
+    grid-template-columns: 1fr;
+  }
+
+  .section-contacto__actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-h: 84px;
+  }
+
+  .header-inner {
+    padding: 0 clamp(0.85rem, 3.5vw, 1.2rem);
+    min-height: var(--header-h);
+  }
+
+  .logo-img {
+    width: 68px;
+    height: 68px;
+  }
+
+  .section-mi-metodo {
+    padding-left: clamp(0.85rem, 3.5vw, 1rem);
+    padding-right: clamp(0.85rem, 3.5vw, 1rem);
+  }
+
+  .section-sobre-miryam {
+    padding-left: clamp(0.85rem, 3.5vw, 1rem);
+    padding-right: clamp(0.85rem, 3.5vw, 1rem);
+  }
+
+  .section-contacto {
+    padding: clamp(2.25rem, 8vw, 3.75rem) clamp(0.85rem, 3.5vw, 1.1rem)
+      clamp(2.75rem, 9vw, 4.5rem);
+  }
+
+  .section-contactame {
+    padding: clamp(2.25rem, 8vw, 3.75rem) clamp(0.85rem, 3.5vw, 1.1rem)
+      clamp(2.75rem, 9vw, 4.5rem);
+  }
+
+  .section-contacto__textarea {
+    min-height: clamp(11rem, 32vh, 16rem);
+  }
+
+  .section-contacto__submit {
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .section-contacto__actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-pill {
+    min-height: 44px;
+  }
+
+  .section-mi-metodo__cta .btn-pill,
+  .section-blog-cta__inner .btn-pill,
+  .section-sobre-miryam__cta {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/* ——— Página Eneagrama ——— */
+
+.page-eneagrama .hero-eneagrama {
+  position: relative;
+  min-height: min(56vh, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(3.5rem, 11vw, 5.75rem) clamp(1rem, 4vw, 1.5rem)
+    clamp(3rem, 9vw, 4.75rem);
+  overflow: hidden;
+}
+
+.hero-eneagrama__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: center / cover no-repeat url("../1x/Recurso%208.png");
+}
+
+.hero-eneagrama__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: min(72rem, calc(100vw - 2rem));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 680px) {
+  .hero-eneagrama__title {
+    white-space: normal;
+    font-size: clamp(1.65rem, 7.25vw, 2.35rem);
+    line-height: 1.12;
+  }
+
+  .hero-eneagrama__subtitle {
+    white-space: normal;
+    font-size: clamp(11pt, 3.4vw, 22pt);
+    line-height: 1.28;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-eneagrama .hero-eneagrama {
+    min-height: min(48vh, 460px);
+  }
+
+  .section-formacion,
+  .section-consulta-cards {
+    padding-top: clamp(2.75rem, 10vw, 5rem);
+    padding-bottom: clamp(3rem, 10vw, 5.5rem);
+    padding-left: clamp(1rem, 4vw, 1.25rem);
+    padding-right: clamp(1rem, 4vw, 1.25rem);
+  }
+}
+
+.section-que-es {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.25rem, 8vw, 6.5rem) clamp(1.25rem, 4vw, 2rem)
+    clamp(3.5rem, 9vw, 6.75rem);
+  background: var(--color-cream);
+}
+
+/* Recurso 9: velos suaves (maqueta); sin atenuar para que se vean los halos */
+.section-que-es__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: center / cover no-repeat url("../1x/Recurso%209.png");
+  opacity: 1;
+  pointer-events: none;
+}
+
+.section-que-es__inner {
+  position: relative;
+  z-index: 1;
+  max-width: min(56rem, 100%);
+  margin: 0 auto;
+}
+
+/* Título: Luckiest Guy Regular 22pt (guía) */
+.section-que-es .section-que-es__title.section-title {
+  margin: 0 auto clamp(1.75rem, 4vw, 2.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(18pt, 3.6vw + 0.65rem, 34pt);
+  font-weight: 400;
+  letter-spacing: 0.028em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-align: center;
+  color: #eb5d27;
+}
+
+.section-que-es__intro {
+  margin: 0 auto 1.35rem;
+  max-width: 46rem;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.02rem, 1.65vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.62;
+  letter-spacing: 0.008em;
+  text-align: center;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  text-shadow:
+    0.3px 0 0 currentColor,
+    -0.3px 0 0 currentColor,
+    0 0.3px 0 currentColor,
+    0 -0.3px 0 currentColor;
+}
+
+.section-que-es__intro:last-of-type {
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.que-es-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  margin: 0 0 clamp(2rem, 4vw, 2.75rem);
+  align-items: stretch;
+}
+
+.que-es-grid__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 6.25rem;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(0.9rem, 1.55vw, 1.1rem);
+  font-weight: 700;
+  text-align: center;
+  color: #eb5d27;
+  line-height: 1.42;
+  padding: 1.15rem 0.85rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(26, 39, 68, 0.1);
+  border: 1px solid rgba(235, 93, 39, 0.12);
+  box-sizing: border-box;
+}
+
+.section-que-es__cta {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.section-que-es__cta .btn-pill {
+  font-size: clamp(0.72rem, 1.1vw, 0.82rem);
+  letter-spacing: 0.09em;
+  padding: 0.95rem 2rem;
+}
+
+@media (max-width: 900px) {
+  .que-es-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .que-es-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-formacion {
+  position: relative;
+  padding: clamp(3.25rem, 8vw, 6rem) clamp(1.5rem, 4vw, 2.5rem)
+    clamp(3.5rem, 8.5vw, 6.25rem);
+  background: #fff;
+  overflow: hidden;
+}
+
+.section-formacion::before,
+.section-formacion::after {
+  content: "";
+  position: absolute;
+  width: min(58vw, 520px);
+  height: min(52vw, 460px);
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.44;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-formacion::before {
+  left: 0;
+  bottom: 0;
+  background-image: url("../1x/Recurso%203.png");
+  background-position: left bottom;
+}
+
+.section-formacion::after {
+  right: 0;
+  top: 0;
+  width: min(62vw, 560px);
+  height: min(62vw, 560px);
+  opacity: 0.48;
+  background-image: url("../1x/Recurso%202.png");
+  background-position: right center;
+}
+
+.section-formacion__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.section-formacion__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.9fr);
+  gap: clamp(1.75rem, 4.5vw, 4rem);
+  align-items: start;
+}
+
+.eyebrow {
+  display: block;
+  text-align: left;
+  font-size: clamp(1.65rem, 2.6vw, 2.3rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #2b2220;
+  margin-bottom: 0.2rem;
+  line-height: 1.15;
+}
+
+.section-formacion .section-title {
+  text-align: left;
+  margin-bottom: 1.35rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.05rem, 4.85vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+  color: #eb5d27;
+}
+
+.formacion-intro {
+  max-width: 31rem;
+  margin: 0 0 0.25rem;
+  text-align: left;
+  font-size: clamp(1.05rem, 1.75vw, 1.28rem);
+  line-height: 1.35;
+  color: #3e3731;
+}
+
+.formacion-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  max-width: 32rem;
+  color: #3e3731;
+  font-size: clamp(1rem, 1.55vw, 1.22rem);
+  line-height: 1.34;
+}
+
+.formacion-list li {
+  margin-bottom: 0.22rem;
+}
+
+.formacion-list li::before {
+  content: "· ";
+  color: #3e3731;
+}
+
+.section-formacion__right {
+  padding-top: clamp(2.3rem, 8vw, 4.9rem);
+}
+
+.accordion {
+  max-width: none;
+  margin: 0;
+  border-radius: var(--radius-field);
+  overflow: hidden;
+  border: 1px solid rgba(var(--color-orange-rgb), 0.35);
+  background: #fff;
+}
+
+.accordion details {
+  border-bottom: 1px solid rgba(var(--color-orange-rgb), 0.22);
+}
+
+.accordion details:last-child {
+  border-bottom: none;
+}
+
+.accordion summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--color-orange);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.accordion--ghost {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+
+.accordion--ghost details {
+  border: none;
+  margin-bottom: clamp(2.2rem, 4vw, 3.4rem);
+}
+
+.accordion--ghost details:last-child {
+  margin-bottom: 0;
+}
+
+.accordion--ghost summary {
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #eb5d27;
+  line-height: 1.1;
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion summary::after {
+  content: "";
+  width: 1.15rem;
+  height: 1.15rem;
+  border-right: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
+  transform: rotate(45deg);
+  margin-left: 0.75rem;
+  margin-right: 0.15rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.accordion--ghost summary::after {
+  width: 1.05rem;
+  height: 1.05rem;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+}
+
+.accordion__body {
+  padding: 0 0 0.9rem;
+  margin-top: 0.75rem;
+  font-size: 0.96rem;
+  line-height: 1.5;
+  color: #4d4540;
+}
+
+.section-formacion__cta {
+  text-align: center;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.section-formacion__cta .btn-pill {
+  font-size: clamp(0.95rem, 1.45vw, 1.12rem);
+  padding: 1rem 2.45rem;
+}
+
+@media (max-width: 900px) {
+  .section-formacion::before,
+  .section-formacion::after {
+    width: min(78vw, 340px);
+    height: min(68vw, 300px);
+    opacity: 0.4;
+  }
+
+  .section-formacion::before {
+    left: 0;
+    bottom: 0;
+  }
+
+  .section-formacion::after {
+    top: 44px;
+    right: 0;
+    width: min(82vw, 360px);
+    height: min(82vw, 360px);
+    opacity: 0.44;
+  }
+
+  .section-formacion__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .eyebrow,
+  .section-formacion .section-title,
+  .formacion-intro,
+  .formacion-list {
+    text-align: left;
+    max-width: 38rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-formacion__right {
+    padding-top: 0;
+    max-width: 38rem;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-formacion::before,
+  .section-formacion::after {
+    width: min(72vw, 290px);
+    height: min(62vw, 250px);
+    opacity: 0.36;
+  }
+
+  .section-formacion::before {
+    left: 0;
+    bottom: 0;
+  }
+
+  .section-formacion::after {
+    right: 0;
+    top: 38px;
+  }
+
+  .accordion--ghost summary {
+    font-size: clamp(1.02rem, 5vw, 1.35rem);
+  }
+
+  .section-formacion__cta .btn-pill {
+    width: min(100%, 24rem);
+  }
+}
+
+.accordion details[open] summary::after {
+  transform: rotate(225deg);
+}
+
+.accordion summary::after {
+  line-height: 1;
+}
+
+.section-consulta-cards {
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 4vw, 2.5rem)
+    clamp(3.75rem, 8.5vw, 6.5rem);
+  background: #fff6f0;
+}
+
+.section-consulta-cards .section-title {
+  text-align: center;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: clamp(2.25rem, 5vw, 3.75rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.15rem, 5.6vw, 4.05rem);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: 0.028em;
+  color: #eb5d27;
+}
+
+.cards-enea {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.card-enea {
+  position: relative;
+  border: 2px solid rgba(var(--color-orange-rgb), 0.55);
+  border-radius: 24px;
+  padding: clamp(2.3rem, 3vw, 2.85rem) clamp(1.1rem, 2vw, 1.5rem)
+    clamp(1.45rem, 2.4vw, 1.95rem);
+  background: #faf5ef;
+  min-height: 24.5rem;
+}
+
+.card-enea__num {
+  position: absolute;
+  top: 0.5rem;
+  left: -0.8rem;
+  color: #eb5d27;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 2.7vw, 2.35rem);
+  line-height: 1;
+  font-weight: 400;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.card-enea h3 {
+  margin: 0 0 1rem;
+  padding-left: 0;
+  font-size: clamp(0.95rem, 1.45vw, 1.32rem);
+  font-family: "Libre Franklin", var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #272320;
+  line-height: 1.18;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  text-shadow:
+    0.25px 0 0 currentColor,
+    -0.25px 0 0 currentColor;
+}
+
+.card-enea__sub {
+  font-weight: 500;
+  text-shadow: none;
+}
+
+.card-enea ul {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  font-size: clamp(0.72rem, 1.02vw, 0.98rem);
+  line-height: 1.25;
+  color: #332d29;
+}
+
+.card-enea li {
+  margin-bottom: 0.28rem;
+}
+
+.card-enea li::before {
+  content: "";
+}
+
+.card-enea li.is-bullet::before {
+  content: "· ";
+  color: #3f3a35;
+}
+
+.section-consulta-cards__cta {
+  text-align: center;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.section-consulta-cards__cta .btn-pill {
+  font-size: clamp(1.05rem, 1.55vw, 1.2rem);
+  padding: 1.05rem 2.7rem;
+}
+
+@media (max-width: 900px) {
+  .cards-enea {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+  }
+
+  .card-enea {
+    min-height: 0;
+  }
+
+  .card-enea h3 {
+    font-size: clamp(1rem, 4.3vw, 1.35rem);
+  }
+
+  .card-enea ul {
+    font-size: clamp(0.76rem, 2.7vw, 0.95rem);
+    line-height: 1.28;
+  }
+}
+
+/* ——— Psicoterapia Integrativa (debajo de consulta) ——— */
+
+.section-psicoterapia {
+  background: #fff;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem)
+    clamp(3.75rem, 9vw, 6.5rem);
+}
+
+.section-psicoterapia__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.section-psicoterapia__head {
+  position: relative;
+  min-height: clamp(360px, 42vw, 520px);
+  display: block;
+  margin-bottom: clamp(1.75rem, 4vw, 2.8rem);
+}
+
+.section-psicoterapia__copy {
+  position: relative;
+  z-index: 2;
+  max-width: min(72ch, 70%);
+}
+
+.section-psicoterapia__kicker {
+  margin: 0 0 0.2rem;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.65rem, 2.7vw, 2.3rem);
+  font-weight: 500;
+  line-height: 1.16;
+  color: #2d2724;
+}
+
+.section-psicoterapia__title {
+  margin: 0 0 1.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.05rem, 4.9vw, 3.65rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #eb5d27;
+}
+
+.section-psicoterapia__lead,
+.section-psicoterapia__note {
+  margin: 0;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.02rem, 1.45vw, 1.24rem);
+  line-height: 1.35;
+  color: #37302b;
+}
+
+.section-psicoterapia__list,
+.section-sobre-page__list {
+  margin: 0.45rem 0 0.7rem;
+  padding-left: 0;
+  list-style: none;
+  font-family: "Libre Franklin", var(--font-body);
+  font-size: clamp(1.02rem, 1.45vw, 1.24rem);
+  line-height: 1.58;
+  color: #37302b;
+}
+
+.section-psicoterapia__list li,
+.section-sobre-page__list li {
+  margin-bottom: 0.95rem;
+}
+
+.section-psicoterapia__list li:last-child,
+.section-sobre-page__list li:last-child {
+  margin-bottom: 0;
+}
+
+.section-psicoterapia__list li::before,
+.section-sobre-page__list li::before {
+  content: "● ";
+  color: #eb5d27;
+  font-size: 0.78em;
+  vertical-align: 0.08em;
+}
+
+.section-sobre-page__list {
+  padding-left: clamp(1.05rem, 2.8vw, 1.55rem);
+  box-sizing: border-box;
+}
+
+.section-psicoterapia__visual {
+  position: absolute;
+  right: -20%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  width: min(62vw, 930px);
+  min-height: min(52vw, 540px);
+  background: center / contain no-repeat url("../1x/Recurso%2010.png");
+  /* Recurso 10 trae un lienzo rectangular; fundimos bordes para evitar el "recuadro" */
+  -webkit-mask-image: radial-gradient(
+    ellipse at 50% 48%,
+    rgba(0, 0, 0, 1) 52%,
+    rgba(0, 0, 0, 0.98) 61%,
+    rgba(0, 0, 0, 0.72) 72%,
+    rgba(0, 0, 0, 0.16) 84%,
+    rgba(0, 0, 0, 0) 98%
+  );
+  mask-image: radial-gradient(
+    ellipse at 50% 48%,
+    rgba(0, 0, 0, 1) 52%,
+    rgba(0, 0, 0, 0.98) 61%,
+    rgba(0, 0, 0, 0.72) 72%,
+    rgba(0, 0, 0, 0.16) 84%,
+    rgba(0, 0, 0, 0) 98%
+  );
+}
+
+.section-psicoterapia__journey {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.section-psicoterapia__journey img {
+  width: min(100%, 980px);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.section-psicoterapia__cta {
+  text-align: center;
+  margin-top: clamp(2.25rem, 5vw, 3.35rem);
+}
+
+.section-psicoterapia__cta .btn-pill {
+  font-size: clamp(0.98rem, 1.35vw, 1.14rem);
+  padding: 1rem 2.5rem;
+}
+
+@media (max-width: 900px) {
+  .section-psicoterapia__head {
+    min-height: 0;
+    text-align: center;
+  }
+
+  .section-psicoterapia__copy {
+    max-width: 34rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-psicoterapia__visual {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: min(100%, 560px);
+    min-height: min(68vw, 420px);
+    margin: 0.5rem auto 0;
+  }
+
+  .section-psicoterapia__list,
+  .section-psicoterapia__lead,
+  .section-psicoterapia__note,
+  .section-sobre-page__list {
+    max-width: 34rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-psicoterapia__journey {
+    margin-top: 1.6rem;
+  }
+}
+
+/* ——— Página Sobre mí ——— */
+
+.page-sobre-mi .hero-sobre-mi {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-sobre-mi__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-sobre-mi__inner {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 4vw, 1.5rem);
+  box-sizing: border-box;
+}
+
+.hero-sobre-mi__title {
+  margin: 0;
+  padding: 0;
+  max-width: min(72rem, calc(100vw - 2rem));
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.85vw + 0.85rem, 5.65rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.032em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 681px) {
+  .hero-sobre-mi__title {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-sobre-mi__title {
+    white-space: normal;
+    font-size: clamp(1.65rem, 7.25vw, 2.35rem);
+    line-height: 1.12;
+  }
+}
+
+.section-sobre-page {
+  background: #fff;
+  overflow-x: clip;
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+  padding-bottom: clamp(4rem, 10vw, 7rem);
+  padding-left: clamp(1.75rem, 6vw, 5rem);
+  padding-right: clamp(1.75rem, 6vw, 5rem);
+}
+
+.section-sobre-page__inner {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(260px, 0.82fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+
+.section-sobre-page__copy {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+}
+
+.section-sobre-page__title {
+  margin: 0 0 clamp(1rem, 2vw, 1.35rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.05rem, 4.6vw, 3.55rem);
+  font-weight: 400;
+  letter-spacing: 0.038em;
+  text-transform: uppercase;
+  color: #eb5d27;
+  line-height: 1.04;
+}
+
+.section-sobre-page__body > p,
+.section-sobre-page__beats p {
+  margin: 0 0 1.12rem;
+  font-family: var(--font-body);
+  font-size: clamp(0.94rem, 1.45vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.68;
+  color: var(--color-text-muted);
+}
+
+.section-sobre-page__beats p {
+  margin-bottom: 0.38rem;
+}
+
+.section-sobre-page__beats p:last-child {
+  margin-bottom: 1.12rem;
+}
+
+.section-sobre-page__visual {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-left: clamp(-1rem, -2vw, 0);
+}
+
+.section-sobre-page__portrait {
+  width: min(100%, 572px);
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 960px) {
+  .section-sobre-page__inner {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .section-sobre-page__copy {
+    text-align: center;
+    max-width: 38rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-sobre-page__visual {
+    margin-left: 0;
+    justify-content: center;
+  }
+
+  .section-sobre-page__portrait {
+    width: min(93.6vw, 520px);
+  }
+}
+
+/* ——— Footer (maqueta: crema, logo, copy verde negrita, iconos, borde inferior) ——— */
+
+.site-footer {
+  background: #f9f3ed;
+  padding: clamp(0.65rem, 1.6vw, 0.95rem) clamp(1rem, 3vw, 2rem);
+  border-top: none;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(0.65rem, 2vw, 1.25rem);
+  flex-wrap: wrap;
+}
+
+.footer-logo-link {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.footer-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 0;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  border: none;
+  display: block;
+}
+
+.footer-copy {
+  margin: 0;
+  flex: 1 1 12rem;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: clamp(0.72rem, 1.35vw, 0.84rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: var(--color-green);
+  min-width: min(100%, 14rem);
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.footer-social a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-green);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.footer-social a:hover {
+  background: var(--color-green-hover);
+  transform: translateY(-2px);
+}
+
+.footer-social svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.85rem;
+  }
+
+  .footer-copy {
+    width: 100%;
+    flex: none;
+  }
+}

@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME:-miryam}
+      - POSTGRES_USER=${DB_USER:-miryam}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-miryam}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-miryam} -d ${DB_NAME:-miryam}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    entrypoint: ./entrypoint-dev.sh
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_ENGINE=postgresql
+      - DB_NAME=${DB_NAME:-miryam}
+      - DB_USER=${DB_USER:-miryam}
+      - DB_PASSWORD=${DB_PASSWORD:-miryam}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - SECRET_KEY=${SECRET_KEY:-django-insecure-miryam-dev-key}
+      - DEBUG=${DEBUG:-True}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
+    volumes:
+      - .:/code
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

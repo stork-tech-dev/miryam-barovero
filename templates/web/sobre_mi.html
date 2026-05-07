@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sobre mí | Miryam Barovero{% endblock %}
+{% block meta_description %}Licenciada en Psicología, Mindset Therapy. Acompaño procesos de ansiedad, duelo, vínculos y transformación profunda.{% endblock %}
+{% block body_class %}page-sobre-mi{% endblock %}
+
+{% block content %}
+<section class="hero-sobre-mi" aria-labelledby="titulo-sobre-mi-hero">
+  <img
+    class="hero-sobre-mi__img"
+    src="{% static '1x/Recurso 12.png' %}"
+    alt=""
+    width="1920"
+    height="559"
+    decoding="async"
+    fetchpriority="high"
+  >
+  <div class="hero-sobre-mi__inner">
+    <h1 id="titulo-sobre-mi-hero" class="hero-sobre-mi__title">Miryam Barovero</h1>
+  </div>
+</section>
+
+<section class="section-sobre-page" aria-labelledby="titulo-sobre-page">
+  <div class="section-sobre-page__inner">
+    <div class="section-sobre-page__copy">
+      <h2 id="titulo-sobre-page" class="section-sobre-page__title">Sobre mí</h2>
+      <div class="section-sobre-page__body">
+        <p>Si llegaste hasta acá, probablemente algo en tu vida se está repitiendo. Tal vez ya intentaste cambiar, entenderte o hacer terapia&hellip; pero hay algo que vuelve a aparecer.</p>
+        <div class="section-sobre-page__beats">
+          <p>Relaciones que no funcionan.</p>
+          <p>Ansiedad que se activa.</p>
+          <p>Exigencia interna que no te da descanso. Y muchas veces no es falta de voluntad.</p>
+        </div>
+        <p>Soy Miryam Barovero, Licenciada en Psicología, egresada de la Universidad de Córdoba, creadora del método Mindset Therapy con más de 25 años acompañando procesos terapéuticos.</p>
+        <p>Trabajo con personas que no buscan solo hablar de lo que les pasa, sino entender la raíz&hellip; y transformarlo de verdad.</p>
+        <p>Acompaño procesos relacionados con:</p>
+        <ul class="section-sobre-page__list">
+          <li>Ansiedad y desregulación emocional</li>
+          <li>Duelos no resueltos</li>
+          <li>Autoexigencia y sensación de insuficiencia</li>
+          <li>Conflictos vinculares</li>
+          <li>Síntomas que se repiten sin explicación clara</li>
+        </ul>
+        <p>Mi enfoque no se queda en el síntoma.</p>
+        <p>Trabajo sobre la estructura emocional que lo sostiene, integrando:</p>
+        <ul class="section-sobre-page__list">
+          <li>Eneagrama</li>
+          <li>EMDR</li>
+          <li>Psicología Junguiana</li>
+          <li>PNL</li>
+          <li>Regulación emocional</li>
+          <li>Audios trances (Hipnosis Ericksoniana)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-sobre-page__visual">
+      <img
+        class="section-sobre-page__portrait"
+        src="{% static '1x/Recurso 13.png' %}"
+        alt="Miryam Barovero"
+        width="754"
+        height="755"
+        decoding="async"
+      >
+    </div>
+  </div>
+</section>
+
+<section class="section-blog-cta" aria-labelledby="titulo-blog-cta">
+  <div class="section-blog-cta__bg" aria-hidden="true"></div>
+  <div class="section-blog-cta__inner">
+    <h2 id="titulo-blog-cta">¿Te gustaría saber más sobre este mundo?</h2>
+    <p>Lee noticias y novedades sobre lo que es la Psicología Integrativa Transpersonal, todo en un solo lugar.</p>
+    <a class="btn-pill" href="#">¡En mi blog!</a>
+  </div>
+</section>
+{% endblock %}

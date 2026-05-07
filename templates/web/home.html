@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Miryam Barovero | Inicio{% endblock %}
+{% block meta_description %}Psicología integrativa transpersonal y Eneagrama. Descubrí tu verdadero potencial.{% endblock %}
+{% block body_class %}page-inicio{% endblock %}
+
+{% block content %}
+<section id="inicio" class="hero-miryam" aria-label="Portada">
+  <div class="hero-miryam__bg" aria-hidden="true"></div>
+  <div class="hero-miryam__overlay" aria-hidden="true"></div>
+  <div class="hero-miryam__inner">
+    <p class="hero-miryam__kicker">Viniste a</p>
+    <h1 class="hero-miryam__title">Transformar tu historia</h1>
+    <p class="hero-miryam__subtitle">Detrás de cada patrón que repetís, hay una versión tuya que merecés conocer.</p>
+  </div>
+</section>
+
+<section class="section-mi-metodo" aria-labelledby="titulo-mi-metodo">
+  <div class="section-mi-metodo__strip section-mi-metodo__strip--top" aria-hidden="true"></div>
+  <div class="section-mi-metodo__watermark section-mi-metodo__watermark--r3" aria-hidden="true"></div>
+  <div class="section-mi-metodo__watermark section-mi-metodo__watermark--r2" aria-hidden="true"></div>
+  <div class="section-mi-metodo__inner">
+    <h2 id="titulo-mi-metodo" class="section-title">Mi método</h2>
+    <p class="section-mi-metodo__lead">Con mi método &ldquo;Mindset Therapy&rdquo;</p>
+    <ul class="section-mi-metodo__list">
+      <li>Vas a entender por qué repetís patrones.</li>
+      <li>Identificarás las estructuras internas que te mantienen atrapado/a.</li>
+      <li>Vas a regular tus emociones sin desbordarte.</li>
+      <li>Aprenderás herramientas concretas para sostener lo que sentís.</li>
+      <li>Vas a transformar tus vínculos.</li>
+      <li>Cambiarás la forma en que te relacionás con quienes más importan.</li>
+      <li>Vas a salir del piloto automático.</li>
+      <li>Empezarás a elegir con conciencia en lugar de reaccionar.</li>
+    </ul>
+    <div class="section-mi-metodo__cta">
+      <a class="btn-pill" href="#">Quiero comenzar mi proceso</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-blog-cta" aria-labelledby="titulo-blog-cta">
+  <div class="section-blog-cta__bg" aria-hidden="true"></div>
+  <div class="section-blog-cta__inner">
+    <h2 id="titulo-blog-cta">¿Te gustaría saber más sobre este mundo?</h2>
+    <p>Lee noticias y novedades sobre lo que es la Psicología Integrativa Transpersonal, todo en un solo lugar.</p>
+    <a class="btn-pill" href="#">¡En mi blog!</a>
+  </div>
+</section>
+
+<section class="section-sobre-miryam" aria-labelledby="titulo-sobre-miryam">
+  <div class="section-sobre-miryam__inner">
+    <div class="section-sobre-miryam__text">
+      <h2 id="titulo-sobre-miryam" class="section-sobre-miryam__title">Miryam Barovero</h2>
+      <p class="section-sobre-miryam__role">Psicóloga Integrativa Transpersonal</p>
+      <div class="section-sobre-miryam__body">
+        <p>Me recibí en la Universidad Nacional de Córdoba y llevo más de 25 años acompañando procesos de transformación real.</p>
+        <p>A lo largo de mi carrera me formé en las disciplinas que hoy integro en cada sesión: Trauma Complejo y Técnicas de Integración Cerebral, Neurociencias aplicadas a la Psicoterapia, Gestalt y Focusing, Hipnosis Ericksoniana, Eneagrama y PNL.</p>
+        <p>De esa integración nació el Método Mindset Therapy — un enfoque que diseño de manera personalizada según la problemática de cada persona, porque ningún proceso es igual a otro.</p>
+        <p>Siempre concebí a la psicoterapia como un refugio: humanista, espiritual y profundo. Lo sé porque yo misma lo atravesé de esa manera y fue así como logré una verdadera transformación sin dejar de lado mi esencia. Acompañar a otros en ese mismo camino no es solo mi trabajo — es mi misión en esta vida.</p>
+      </div>
+      <a class="btn-pill section-sobre-miryam__cta" href="{% url 'web:sobre_mi' %}">Saber más de mí</a>
+    </div>
+    <div class="section-sobre-miryam__visual">
+      <div class="section-sobre-miryam__photo-wrap">
+        <img
+          class="section-sobre-miryam__photo"
+          src="{% static '1x/Recurso 6.png' %}"
+          alt="Miryam Barovero"
+          width="700"
+          height="700"
+          decoding="async"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="section-contacto" aria-labelledby="titulo-contacto">
+  <div class="section-contacto__bg" aria-hidden="true"></div>
+  <div class="section-contacto__inner">
+    <h2 id="titulo-contacto" class="section-contacto__title">Comencemos a hablar!</h2>
+    <form class="section-contacto__form" method="post" action="{% url 'web:home' %}">
+      {% csrf_token %}
+      <div class="section-contacto__row section-contacto__row--split">
+        <label class="section-contacto__wrap">
+          <span class="section-contacto__lab">Nombre</span>
+          <input class="section-contacto__control" type="text" name="nombre" id="id_contacto_nombre" required autocomplete="given-name" maxlength="120">
+        </label>
+        <label class="section-contacto__wrap">
+          <span class="section-contacto__lab">Apellido</span>
+          <input class="section-contacto__control" type="text" name="apellido" id="id_contacto_apellido" required autocomplete="family-name" maxlength="120">
+        </label>
+      </div>
+      <div class="section-contacto__row">
+        <label class="section-contacto__wrap">
+          <span class="section-contacto__lab">Email</span>
+          <input class="section-contacto__control" type="email" name="email" id="id_contacto_email" required autocomplete="email" maxlength="254">
+        </label>
+      </div>
+      <div class="section-contacto__row">
+        <label class="section-contacto__wrap section-contacto__wrap--textarea">
+          <span class="section-contacto__lab">Consulta</span>
+          <textarea class="section-contacto__control section-contacto__textarea" name="consulta" id="id_contacto_consulta" required rows="6" maxlength="4000"></textarea>
+        </label>
+      </div>
+      <div class="section-contacto__actions">
+        <button type="submit" class="btn-pill section-contacto__submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

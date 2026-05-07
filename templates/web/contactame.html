@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contactame | Miryam Barovero{% endblock %}
+{% block meta_description %}Escribime para comenzar un proceso: Eneagrama, Mindset Therapy o formación en Eneagrama Integrativo.{% endblock %}
+{% block body_class %}page-contactame{% endblock %}
+
+{% block content %}
+<section class="section-contactame" aria-labelledby="titulo-contactame">
+  <div class="section-contacto__bg" aria-hidden="true"></div>
+  <div class="section-contactame__inner">
+    <h1 id="titulo-contactame" class="section-contactame__title">Comenzar un proceso</h1>
+    <p class="section-contactame__lead">
+      Si algo en vos te está pidiendo un cambio profundo, ya sea<br>
+      a través del Eneagrama, mi método &ldquo;Mindset Therapy&rdquo;<br>
+      o formarte en Eneagrama Integrativo, estoy acá para<br>
+      acompañarte. Contactame.
+    </p>
+    <form class="section-contacto__form section-contactame__form" method="post" action="{% url 'web:contactame' %}">
+      {% csrf_token %}
+      <div class="section-contacto__row section-contacto__row--split">
+        <label class="section-contacto__wrap">
+          <span class="section-contacto__lab">Nombre</span>
+          <input class="section-contacto__control" type="text" name="nombre" id="id_contactame_nombre" required autocomplete="given-name" maxlength="120">
+        </label>
+        <label class="section-contacto__wrap">
+          <span class="section-contacto__lab">Apellido</span>
+          <input class="section-contacto__control" type="text" name="apellido" id="id_contactame_apellido" required autocomplete="family-name" maxlength="120">
+        </label>
+      </div>
+      <div class="section-contacto__row">
+        <label class="section-contacto__wrap">
+          <span class="section-contacto__lab">Email</span>
+          <input class="section-contacto__control" type="email" name="email" id="id_contactame_email" required autocomplete="email" maxlength="254">
+        </label>
+      </div>
+      <div class="section-contacto__row">
+        <label class="section-contacto__wrap section-contacto__wrap--textarea">
+          <span class="section-contacto__lab">Consulta</span>
+          <textarea class="section-contacto__control section-contacto__textarea" name="consulta" id="id_contactame_consulta" required rows="6" maxlength="4000"></textarea>
+        </label>
+      </div>
+      <div class="section-contacto__actions">
+        <button type="submit" class="btn-pill section-contacto__submit">Enviar</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
