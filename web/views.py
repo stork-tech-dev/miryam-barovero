@@ -70,6 +70,15 @@ class EneagramaView(TemplateView):
         return ctx
 
 
+class RetirosView(TemplateView):
+    template_name = "web/retiros.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["nav_section"] = "retiros"
+        return ctx
+
+
 class SobreMiView(TemplateView):
     template_name = "web/sobre_mi.html"
 

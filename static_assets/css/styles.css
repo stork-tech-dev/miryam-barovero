@@ -1203,6 +1203,426 @@ a {
   }
 }
 
+/* Utilidad accesible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ——— Página Retiros ——— */
+
+.page-retiros .hero-retiros {
+  position: relative;
+  min-height: clamp(280px, 46vw, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(3rem, 9vw, 5rem) clamp(1rem, 4vw, 1.5rem);
+}
+
+.hero-retiros__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: center / cover no-repeat url("../1x/Recurso%2014.png");
+}
+
+.hero-retiros__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: transparent;
+}
+
+.hero-retiros__inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: min(74rem, calc(100vw - 2rem));
+  text-align: center;
+}
+
+.hero-retiros__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.25vw + 0.75rem, 5.2rem);
+  line-height: 1.06;
+  letter-spacing: 0.032em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.section-retiros {
+  position: relative;
+  overflow: hidden;
+  background-image:
+    url("../1x/Recurso%2015.png"),
+    url("../1x/Recurso%2016.png"),
+    url("../1x/Recurso%2017.png");
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: right top, left center, right bottom;
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+  padding: clamp(3.4rem, 8.5vw, 5.6rem) clamp(1.25rem, 5vw, 2.5rem)
+    clamp(3.4rem, 9vw, 5.8rem);
+}
+
+.section-retiros__inner {
+  position: relative;
+  z-index: 1;
+  max-width: min(72rem, 100%);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-retiros__inner p {
+  margin: 0 0 1.1rem;
+  font-size: clamp(1.1rem, 1.52vw, 1.72rem);
+  line-height: 1.42;
+  color: #3f3732;
+}
+
+.retiros-benefits {
+  margin: clamp(1.9rem, 4vw, 2.6rem) auto clamp(2.15rem, 5vw, 3.1rem);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(170px, 1fr));
+  gap: clamp(0.85rem, 1.7vw, 1.3rem);
+}
+
+.retiros-benefits__item {
+  min-height: 10.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid rgba(var(--color-orange-rgb), 0.72);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #cf5f36;
+  font-size: clamp(1.05rem, 1.25vw, 1.42rem);
+  line-height: 1.26;
+  padding: 1.2rem 1.05rem;
+}
+
+.retiros-list {
+  margin: 0 auto clamp(1.9rem, 4.5vw, 2.8rem);
+  padding: 0;
+  list-style: none;
+}
+
+.retiros-list li {
+  margin-bottom: 0.34rem;
+  font-size: clamp(1.08rem, 1.42vw, 1.4rem);
+  color: #3f3732;
+  line-height: 1.38;
+}
+
+.retiros-list li:last-child {
+  margin-bottom: 0;
+}
+
+.retiros-list li::before {
+  content: "•";
+  margin-right: 0.35rem;
+  color: #3f3732;
+}
+
+.section-retiros__closing {
+  margin-bottom: 0 !important;
+  font-size: clamp(1.62rem, 2.35vw, 2.25rem) !important;
+  line-height: 1.22 !important;
+  color: #e36d3a !important;
+}
+
+/* Retiros — sección público objetivo */
+.section-retiros-publico {
+  background: #fff6f0;
+  padding: clamp(3rem, 7vw, 5.2rem) clamp(1.2rem, 5vw, 3rem)
+    clamp(3.2rem, 8vw, 5.6rem);
+}
+
+.section-retiros-publico__inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.95fr);
+  gap: clamp(1.25rem, 3vw, 2.75rem);
+  align-items: center;
+}
+
+.section-retiros-publico__copy {
+  color: #3e3732;
+}
+
+.section-retiros-publico__title {
+  margin: 0 0 clamp(1rem, 2vw, 1.4rem);
+  line-height: 1.04;
+}
+
+.section-retiros-publico__title-top {
+  display: block;
+  font-family: var(--font-body);
+  font-size: clamp(1.75rem, 3vw, 2.3rem);
+  font-weight: 500;
+  color: #2e2a27;
+}
+
+.section-retiros-publico__title-main {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #eb5d27;
+}
+
+.section-retiros-publico__copy p {
+  margin: 0 0 0.45rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.45rem);
+  line-height: 1.4;
+}
+
+.section-retiros-publico__copy ul {
+  margin: 0;
+  padding: 0 0 0 0.95rem;
+  list-style: none;
+}
+
+.section-retiros-publico__copy li {
+  margin-bottom: 0.2rem;
+  font-size: clamp(1.1rem, 1.45vw, 1.42rem);
+  line-height: 1.36;
+}
+
+.section-retiros-publico__copy li::before {
+  content: "·";
+  margin-right: 0.45rem;
+}
+
+.section-retiros-publico__visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-retiros-publico__visual img {
+  width: min(100%, 560px);
+  height: auto;
+}
+
+/* Retiros — sección próximos retiros (cards dinámicas) */
+.section-proximos-retiros {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  padding: clamp(3.2rem, 8vw, 5.8rem) clamp(1.2rem, 5vw, 3rem)
+    clamp(3.8rem, 9vw, 6.4rem);
+}
+
+.section-proximos-retiros::before,
+.section-proximos-retiros::after {
+  content: "";
+  position: absolute;
+  width: min(58vw, 520px);
+  height: min(52vw, 460px);
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.44;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-proximos-retiros::before {
+  left: 0;
+  bottom: 0;
+  background-image: url("../1x/Recurso%203.png");
+  background-position: left bottom;
+}
+
+.section-proximos-retiros::after {
+  right: 0;
+  top: 0;
+  width: min(62vw, 560px);
+  height: min(62vw, 560px);
+  opacity: 0.48;
+  background-image: url("../1x/Recurso%202.png");
+  background-position: right center;
+}
+
+.section-proximos-retiros__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1160px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-proximos-retiros__title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4.3vw, 3.35rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #eb5d27;
+  letter-spacing: 0.02em;
+  line-height: 1.06;
+}
+
+.section-proximos-retiros__lead,
+.section-proximos-retiros__sublead {
+  margin: 0 auto;
+  max-width: 48rem;
+  font-size: clamp(1.02rem, 1.45vw, 1.35rem);
+  line-height: 1.38;
+  color: #3f3732;
+}
+
+.section-proximos-retiros__lead {
+  margin-bottom: 0.55rem;
+}
+
+.section-proximos-retiros__sublead {
+  margin-bottom: clamp(1.7rem, 4vw, 2.8rem);
+}
+
+.proximos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.95rem, 2vw, 1.5rem);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.proximo-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border: 2px solid rgba(23, 84, 65, 0.7);
+  background: #f2f4f3;
+}
+
+.proximo-card__media {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 78% 87%, rgba(26, 120, 78, 0.48), transparent 36%),
+    radial-gradient(circle at 22% 28%, rgba(33, 90, 52, 0.2), transparent 44%),
+    linear-gradient(160deg, #6ca05f 0%, #3f7a3c 52%, #2d5a30 100%);
+}
+
+.proximo-card--featured .proximo-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.proximo-card__overlay {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: clamp(1rem, 2.5vw, 1.35rem) clamp(0.95rem, 2.2vw, 1.2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #fff;
+  text-align: left;
+}
+
+.proximo-card__kicker {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.1vw, 1.8rem);
+  line-height: 1.1;
+}
+
+.proximo-card__title {
+  margin: 0 0 0.8rem;
+  font-size: clamp(1.9rem, 2.5vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.proximo-card__text {
+  margin: 0;
+  font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+  line-height: 1.34;
+  max-width: 95%;
+}
+
+.proximo-card__cta {
+  margin-top: auto;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.82rem 1.55rem;
+  border-radius: 9999px;
+  background: #fff;
+  color: #4c6158;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 980px) {
+  .retiros-benefits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .section-retiros-publico__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .section-retiros-publico__copy ul {
+    display: inline-block;
+    text-align: left;
+  }
+
+  .proximos-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
+
+  .section-proximos-retiros::before,
+  .section-proximos-retiros::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-retiros__title {
+    font-size: clamp(1.7rem, 8.5vw, 2.35rem);
+    line-height: 1.14;
+  }
+
+  .section-retiros {
+    padding-left: clamp(0.95rem, 4vw, 1.2rem);
+    padding-right: clamp(0.95rem, 4vw, 1.2rem);
+  }
+
+  .retiros-benefits {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .retiros-benefits__item {
+    min-height: 7.8rem;
+  }
+}
+
 /* ——— Página Eneagrama ——— */
 
 .page-eneagrama .hero-eneagrama {

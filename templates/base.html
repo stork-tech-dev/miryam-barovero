@@ -21,7 +21,7 @@
         <ul>
           <li><a href="{% url 'web:home' %}" class="{% if nav_section == 'inicio' %}is-active{% endif %}">Inicio</a></li>
           <li><a href="{% url 'web:eneagrama' %}" class="{% if nav_section == 'eneagrama' %}is-active{% endif %}">Eneagrama</a></li>
-          <li><a href="#">Retiros</a></li>
+          <li><a href="{% url 'web:retiros' %}" class="{% if nav_section == 'retiros' %}is-active{% endif %}">Retiros</a></li>
           <li><a href="{% url 'web:sobre_mi' %}" class="{% if nav_section == 'sobre_mi' %}is-active{% endif %}">Sobre mí</a></li>
           <li><a href="{% url 'web:contactame' %}" class="{% if nav_section == 'contactame' %}is-active{% endif %}">Contactame</a></li>
         </ul>

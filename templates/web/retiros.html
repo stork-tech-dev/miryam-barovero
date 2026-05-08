@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Retiros y viajes conscientes | Miryam Barovero{% endblock %}
+{% block meta_description %}Retiros y viajes conscientes para pausar, reconectar y abrir nuevos caminos de autoconocimiento.{% endblock %}
+{% block body_class %}page-retiros{% endblock %}
+
+{% block content %}
+<section class="hero-retiros" aria-labelledby="titulo-retiros-hero">
+  <div class="hero-retiros__bg" aria-hidden="true"></div>
+  <div class="hero-retiros__overlay" aria-hidden="true"></div>
+  <div class="hero-retiros__inner">
+    <h1 id="titulo-retiros-hero" class="hero-retiros__title">Retiros y viajes conscientes</h1>
+  </div>
+</section>
+
+<section class="section-retiros" aria-labelledby="titulo-retiros">
+  <div class="section-retiros__inner">
+    <h2 id="titulo-retiros" class="sr-only">Beneficios de los retiros</h2>
+    <p>Viajar puede ser mucho más que cambiar de lugar. Puede ser una oportunidad para reencontrarnos con nosotros mismos.</p>
+    <p>Los retiros y viajes conscientes que propongo están diseñados como espacios de pausa, profundidad y transformación, donde el entorno natural, el silencio y el trabajo interior se combinan para abrir nuevos caminos de autoconocimiento.</p>
+    <p>A través de herramientas de Psicología Integrativa, Eneagrama, PNL, meditación y prácticas corporales, estos encuentros permiten detener el ritmo cotidiano y crear un espacio para:</p>
+
+    <div class="retiros-benefits" role="list">
+      <div class="retiros-benefits__item" role="listitem">Reconectar con la propia esencia</div>
+      <div class="retiros-benefits__item" role="listitem">Comprender patrones emocionales y relacionales</div>
+      <div class="retiros-benefits__item" role="listitem">Liberar tensiones acumuladas</div>
+      <div class="retiros-benefits__item" role="listitem">Abrir nuevas perspectivas para la vida personal y profesional</div>
+    </div>
+
+    <p>Cada retiro es una experiencia íntima y cuidada, en grupos pequeños, donde se crea un clima de confianza, profundidad y crecimiento compartido.</p>
+    <p>Los viajes conscientes integran momentos de:</p>
+    <ul class="retiros-list">
+      <li>exploración interior</li>
+      <li>contacto con la naturaleza</li>
+      <li>espacios de reflexión y silencio</li>
+      <li>encuentros grupales de aprendizaje y transformación</li>
+    </ul>
+    <p class="section-retiros__closing">Más que un viaje, es una travesía hacia uno mismo</p>
+  </div>
+</section>
+
+<section class="section-retiros-publico" aria-labelledby="titulo-retiros-publico">
+  <div class="section-retiros-publico__inner">
+    <div class="section-retiros-publico__copy">
+      <h2 id="titulo-retiros-publico" class="section-retiros-publico__title">
+        <span class="section-retiros-publico__title-top">¿Para quiénes son</span>
+        <span class="section-retiros-publico__title-main">estos retiros?</span>
+      </h2>
+      <p>Para personas que sienten el llamado a:</p>
+      <ul>
+        <li>Hacer una pausa en su vida</li>
+        <li>Comprenderse en mayor profundidad</li>
+        <li>Atravesar procesos de cambio</li>
+        <li>Nutrir su bienestar emocional y espiritual</li>
+        <li>Compartir experiencias significativas con otros</li>
+      </ul>
+    </div>
+    <div class="section-retiros-publico__visual">
+      <img src="{% static '1x/Recurso 18 transparente.png' %}" alt="Ilustración de mujer en meditación" width="1200" height="1200" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="section-proximos-retiros" aria-labelledby="titulo-proximos-retiros">
+  <div class="section-proximos-retiros__inner">
+    <h2 id="titulo-proximos-retiros" class="section-proximos-retiros__title">Próximos retiros</h2>
+    <p class="section-proximos-retiros__lead">En esta sección encontrarás las próximas propuestas de retiros y viajes conscientes que iremos organizando a lo largo del año.</p>
+    <p class="section-proximos-retiros__sublead">Cada encuentro tendrá su propio enfoque y temática.</p>
+
+    <div class="proximos-grid">
+      <article class="proximo-card" aria-label="Próximo retiro 1">
+        <div class="proximo-card__media" aria-hidden="true"></div>
+      </article>
+
+      <article class="proximo-card proximo-card--featured" aria-label="Retiro destacado">
+        <div class="proximo-card__media" aria-hidden="true"></div>
+        <div class="proximo-card__overlay">
+          <p class="proximo-card__kicker">Retiro:</p>
+          <h3 class="proximo-card__title">Fuerza interna</h3>
+          <p class="proximo-card__text">Espacio reservado para la descripción del retiro. Luego se reemplaza por contenido dinámico.</p>
+          <a class="proximo-card__cta" href="#">Inscribirme</a>
+        </div>
+      </article>
+
+      <article class="proximo-card" aria-label="Próximo retiro 2">
+        <div class="proximo-card__media" aria-hidden="true"></div>
+      </article>
+    </div>
+  </div>
+</section>
+{% endblock %}
