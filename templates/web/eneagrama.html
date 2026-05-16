@@ -27,7 +27,7 @@
       <div class="que-es-grid__item" role="listitem">Nuestro camino de crecimiento</div>
     </div>
     <div class="section-que-es__cta">
-      <a class="btn-pill" href="#">Hacer test rápido</a>
+      <a class="btn-pill" href="{% url 'web:enneagram_test' %}">Hacer test rápido</a>
     </div>
   </div>
 </section>
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="section-formacion__cta">
-      <a class="btn-pill" href="#">Quiero hacer el curso inicial</a>
+      <a class="btn-pill" href="{% url 'web:contactame' %}">Quiero hacer el curso inicial</a>
     </div>
   </div>
 </section>
@@ -70,7 +70,7 @@
   <h2 id="titulo-consulta" class="section-title">¿Cómo trabajo el Eneagrama en consulta individual?</h2>
   <div class="cards-enea">
     <article class="card-enea">
-      <span class="card-enea__num" aria-hidden="true">1.</span>
+      <span class="card-enea__num">Opción 1</span>
       <h3>Conocerte<br><span class="card-enea__sub">Evaluación + devolución</span></h3>
       <ul>
         <li>Para cuando querés empezar a entenderte de verdad.</li>
@@ -83,7 +83,7 @@
       </ul>
     </article>
     <article class="card-enea">
-      <span class="card-enea__num" aria-hidden="true">2.</span>
+      <span class="card-enea__num">Opción 2</span>
       <h3>Trabajar en vos</h3>
       <ul>
         <li>Si ya sabés que querés ir más profundo, podés trabajar tu estructura con Eneagrama en sesiones.</li>
@@ -94,7 +94,7 @@
       </ul>
     </article>
     <article class="card-enea">
-      <span class="card-enea__num" aria-hidden="true">3.</span>
+      <span class="card-enea__num">Opción 3</span>
       <h3>Intervención terapéutica</h3>
       <ul>
         <li>Proceso profundo - 12 sesiones</li>
@@ -108,7 +108,7 @@
     </article>
   </div>
   <div class="section-consulta-cards__cta">
-    <a class="btn-pill" href="#">Quiero conocerme mas</a>
+    <a class="btn-pill" href="{% url 'web:contactame' %}">Quiero conocerme mas</a>
   </div>
 </section>
 
@@ -116,6 +116,7 @@
   <div class="section-psicoterapia__inner">
     <div class="section-psicoterapia__head">
       <div class="section-psicoterapia__copy">
+        <h2 class="section-psicoterapia__method">Mindset Therapy</h2>
         <p class="section-psicoterapia__kicker">Proceso estructurado de 12 sesiones</p>
         <h2 id="titulo-psicoterapia" class="section-psicoterapia__title">Psicoterapia integrativa</h2>
         <p class="section-psicoterapia__lead">Trabajo con un modelo que integra:</p>
@@ -138,7 +139,7 @@
     </div>
 
     <div class="section-psicoterapia__cta">
-      <a class="btn-pill" href="#">Entrevista inicial</a>
+      <a class="btn-pill" href="{% url 'web:contactame' %}">Entrevista inicial</a>
     </div>
   </div>
 </section>

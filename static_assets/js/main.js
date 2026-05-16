@@ -26,4 +26,62 @@
       });
     });
   }
+
+  window.initSiteToast = function initSiteToast() {
+    var toastOverlay = document.getElementById("siteToastOverlay");
+    if (!toastOverlay) return;
+
+    var autoCloseTimer = null;
+
+    function onEscape(event) {
+      if (event.key === "Escape") {
+        dismissToast();
+      }
+    }
+
+    function dismissToast() {
+      var redirectUrl = toastOverlay.getAttribute("data-redirect-on-close");
+      if (autoCloseTimer) {
+        window.clearTimeout(autoCloseTimer);
+        autoCloseTimer = null;
+      }
+      document.removeEventListener("keydown", onEscape);
+      toastOverlay.classList.remove("is-visible");
+      toastOverlay.style.pointerEvents = "none";
+      window.setTimeout(function () {
+        if (toastOverlay.parentNode) {
+          toastOverlay.parentNode.removeChild(toastOverlay);
+        }
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        }
+      }, 280);
+    }
+
+    toastOverlay.addEventListener("click", function (event) {
+      if (event.target.closest("[data-dismiss='toast']")) {
+        event.preventDefault();
+        event.stopPropagation();
+        dismissToast();
+        return;
+      }
+      if (event.target === toastOverlay) {
+        dismissToast();
+      }
+    });
+
+    document.addEventListener("keydown", onEscape);
+
+    autoCloseTimer = window.setTimeout(dismissToast, 8000);
+  }
+
+  window.initSiteToast();
+
+  if (window.location.hash === "#resultado") {
+    var resultEl = document.getElementById("resultado");
+    if (resultEl) {
+      resultEl.focus({ preventScroll: true });
+      resultEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
 })();

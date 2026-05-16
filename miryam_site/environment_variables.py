@@ -32,3 +32,20 @@ DB_PASSWORD = env("DB_PASSWORD", default="")
 DB_HOST = env("DB_HOST", default="")
 DB_PORT = env("DB_PORT", default="")
 DB_NAME = env("DB_NAME", default="miryam")
+
+CONTACT_FORM_RECIPIENT_EMAIL = env(
+    "CONTACT_FORM_RECIPIENT_EMAIL",
+    default="agusgattasrp@gmail.com",
+)
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="web@miryambarovero.com.ar")
+
+# EmailJS (misma cuenta que Stork Landing — envío desde el navegador)
+EMAILJS_SERVICE_ID = env("EMAILJS_SERVICE_ID", default="service_392pf6s")
+EMAILJS_TEMPLATE_ID = env("EMAILJS_TEMPLATE_ID", default="template_qhkfc1d")
+EMAILJS_PUBLIC_KEY = env("EMAILJS_PUBLIC_KEY", default="uT_FIk0s12tcwpouj")
+
+EMAIL_HOST = env("EMAIL_HOST", default="")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)

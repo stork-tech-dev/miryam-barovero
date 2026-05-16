@@ -14,6 +14,16 @@ from miryam_site.environment_variables import (
     DB_PASSWORD,
     DB_HOST,
     DB_PORT,
+    CONTACT_FORM_RECIPIENT_EMAIL,
+    DEFAULT_FROM_EMAIL,
+    EMAILJS_SERVICE_ID,
+    EMAILJS_TEMPLATE_ID,
+    EMAILJS_PUBLIC_KEY,
+    EMAIL_HOST,
+    EMAIL_PORT,
+    EMAIL_HOST_USER,
+    EMAIL_HOST_PASSWORD,
+    EMAIL_USE_TLS,
 )
 
 INSTALLED_APPS = [
@@ -51,6 +61,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "web.context_processors.site_links",
+                "web.context_processors.emailjs",
             ],
         },
     },
@@ -109,6 +121,31 @@ else:
     MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+SOCIAL_INSTAGRAM_URL = (
+    "https://www.instagram.com/miryam_psi?igsh=MXcyaTdxZGV3M2gwcQ%3D%3D"
+)
+SOCIAL_FACEBOOK_URL = "https://www.facebook.com/miryam.barovero?locale=es_LA"
+SOCIAL_WHATSAPP_URL = "https://wa.me/5493512467943"
+SOCIAL_BLOG_URL = (
+    "https://www.threads.com/@miryam_psi"
+    "?xmt=AQG0fVcaMfUWEwngLOJGQwEHAtBhXP279Nl-56P-aqKs26g"
+)
+
+CONTACT_FORM_RECIPIENT_EMAIL = CONTACT_FORM_RECIPIENT_EMAIL
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
+EMAILJS_SERVICE_ID = EMAILJS_SERVICE_ID
+EMAILJS_TEMPLATE_ID = EMAILJS_TEMPLATE_ID
+EMAILJS_PUBLIC_KEY = EMAILJS_PUBLIC_KEY
+
+if EMAIL_HOST:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_PORT = EMAIL_PORT
+    EMAIL_HOST_USER = EMAIL_HOST_USER
+    EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+    EMAIL_USE_TLS = EMAIL_USE_TLS
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 LOGIN_URL = "/admin/login/"
 LOGIN_REDIRECT_URL = "/admin/"

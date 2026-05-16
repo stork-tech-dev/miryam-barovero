@@ -4,10 +4,16 @@ from pathlib import Path
 from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseForbidden
-from django.shortcuts import redirect
-from django.urls import reverse
 from django.views.generic import TemplateView
 from django.views.static import serve
+
+from web.enneagram_test import (
+    ENNEATYPE_BY_LETTER,
+    QUESTIONS,
+    VALID_CHOICES,
+    calculate_result,
+    get_enneagram_emailjs_params,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -38,23 +44,6 @@ def media_debug(request):
 class HomeView(TemplateView):
     template_name = "web/home.html"
 
-    def post(self, request, *args, **kwargs):
-        nombre = (request.POST.get("nombre") or "").strip()
-        apellido = (request.POST.get("apellido") or "").strip()
-        email = (request.POST.get("email") or "").strip()
-        consulta = (request.POST.get("consulta") or "").strip()
-        if not (nombre and apellido and email and consulta):
-            messages.error(
-                request,
-                "Por favor completá todos los campos del formulario.",
-            )
-        else:
-            messages.success(
-                request,
-                "Gracias por tu mensaje. Te responderemos a la brevedad.",
-            )
-        return redirect(reverse("web:home") + "#contacto")
-
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["nav_section"] = "inicio"
@@ -68,6 +57,55 @@ class EneagramaView(TemplateView):
         ctx = super().get_context_data(**kwargs)
         ctx["nav_section"] = "eneagrama"
         return ctx
+
+
+class EnneagramTestView(TemplateView):
+    template_name = "web/eneagrama_test.html"
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx["nav_section"] = "eneagrama"
+        ctx["questions"] = QUESTIONS
+        ctx["enneatype_by_letter"] = ENNEATYPE_BY_LETTER
+        ctx.setdefault("show_result", False)
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        nombre = (request.POST.get("nombre") or "").strip()
+        email = (request.POST.get("email") or "").strip()
+        answers = {}
+        valid = True
+
+        for question in QUESTIONS:
+            letter = (request.POST.get(question["id"]) or "").strip().upper()
+            if letter not in VALID_CHOICES:
+                valid = False
+                break
+            answers[question["id"]] = letter
+
+        if not valid:
+            messages.error(
+                request,
+                "Respondé las cuatro preguntas eligiendo una opción en cada grupo.",
+            )
+            return self.render_to_response(self.get_context_data())
+
+        result = calculate_result(answers)
+
+        ctx = self.get_context_data()
+        ctx["show_result"] = True
+        ctx["result"] = result
+        ctx["answers"] = answers
+        ctx["nombre"] = nombre
+        ctx["email"] = email
+        ctx["emailjs_payload"] = get_enneagram_emailjs_params(
+            nombre=nombre,
+            email=email,
+            answers=answers,
+            result=result,
+            to_email=settings.CONTACT_FORM_RECIPIENT_EMAIL,
+        )
+        return self.render_to_response(ctx)
 
 
 class RetirosView(TemplateView):
@@ -90,23 +128,6 @@ class SobreMiView(TemplateView):
 
 class ContactameView(TemplateView):
     template_name = "web/contactame.html"
-
-    def post(self, request, *args, **kwargs):
-        nombre = (request.POST.get("nombre") or "").strip()
-        apellido = (request.POST.get("apellido") or "").strip()
-        email = (request.POST.get("email") or "").strip()
-        consulta = (request.POST.get("consulta") or "").strip()
-        if not (nombre and apellido and email and consulta):
-            messages.error(
-                request,
-                "Por favor completá todos los campos del formulario.",
-            )
-        else:
-            messages.success(
-                request,
-                "Gracias por tu mensaje. Te responderemos a la brevedad.",
-            )
-        return redirect(reverse("web:contactame"))
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)

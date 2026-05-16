@@ -8,7 +8,6 @@
 {% block content %}
 <section id="inicio" class="hero-miryam" aria-label="Portada">
   <div class="hero-miryam__bg" aria-hidden="true"></div>
-  <div class="hero-miryam__overlay" aria-hidden="true"></div>
   <div class="hero-miryam__inner">
     <p class="hero-miryam__kicker">Viniste a</p>
     <h1 class="hero-miryam__title">Transformar tu historia</h1>
@@ -34,7 +33,7 @@
       <li>Empezarás a elegir con conciencia en lugar de reaccionar.</li>
     </ul>
     <div class="section-mi-metodo__cta">
-      <a class="btn-pill" href="#">Quiero comenzar mi proceso</a>
+      <a class="btn-pill" href="{% url 'web:contactame' %}">Quiero comenzar mi proceso</a>
     </div>
   </div>
 </section>
@@ -44,7 +43,7 @@
   <div class="section-blog-cta__inner">
     <h2 id="titulo-blog-cta">¿Te gustaría saber más sobre este mundo?</h2>
     <p>Lee noticias y novedades sobre lo que es la Psicología Integrativa Transpersonal, todo en un solo lugar.</p>
-    <a class="btn-pill" href="#">¡En mi blog!</a>
+    <a class="btn-pill" href="{{ url_blog }}" target="_blank" rel="noopener noreferrer">¡En mi blog!</a>
   </div>
 </section>
 
@@ -80,8 +79,7 @@
   <div class="section-contacto__bg" aria-hidden="true"></div>
   <div class="section-contacto__inner">
     <h2 id="titulo-contacto" class="section-contacto__title">Comencemos a hablar!</h2>
-    <form class="section-contacto__form" method="post" action="{% url 'web:home' %}">
-      {% csrf_token %}
+    <form class="section-contacto__form js-emailjs-contact" method="post" action="#" novalidate>
       <div class="section-contacto__row section-contacto__row--split">
         <label class="section-contacto__wrap">
           <span class="section-contacto__lab">Nombre</span>

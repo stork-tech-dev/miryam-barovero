@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Test rápido de Eneagrama | Miryam Barovero{% endblock %}
+{% block meta_description %}Test rápido de Eneagrama: descubrí tu eneatipo predominante en cuatro preguntas.{% endblock %}
+{% block body_class %}page-eneagrama page-eneagrama-test{% endblock %}
+
+{% block content %}
+<section class="section-enea-test" aria-labelledby="titulo-enea-test">
+  <div class="section-enea-test__inner">
+    <h1 id="titulo-enea-test" class="section-enea-test__title">Test rápido de Eneagrama</h1>
+
+    {% if not show_result %}
+    <div class="section-enea-test__instructions">
+      <h2 class="section-enea-test__subtitle">Instrucciones</h2>
+      <p>Leé cada grupo y elegí <strong>una sola opción</strong> por grupo (la que más te represente en general, no en un momento puntual).</p>
+    </div>
+
+    <form class="enea-test-form" method="post" action="{% url 'web:enneagram_test' %}">
+      {% csrf_token %}
+
+      <div class="enea-test-form__contact">
+        <p class="enea-test-form__contact-lead">Opcional: dejá tus datos para que podamos contactarte.</p>
+        <div class="enea-test-form__contact-row">
+          <label class="enea-test-form__field">
+            <span>Nombre</span>
+            <input type="text" name="nombre" value="{{ nombre|default:'' }}" maxlength="120" autocomplete="name">
+          </label>
+          <label class="enea-test-form__field">
+            <span>Email</span>
+            <input type="email" name="email" value="{{ email|default:'' }}" maxlength="254" autocomplete="email">
+          </label>
+        </div>
+      </div>
+
+      {% for question in questions %}
+      <fieldset class="enea-test-question">
+        <legend class="enea-test-question__legend">{{ forloop.counter }}. {{ question.text }}</legend>
+        <div class="enea-test-question__options">
+          {% for letter, label in question.options %}
+          <label class="enea-test-option">
+            <input type="radio" name="{{ question.id }}" value="{{ letter }}" required>
+            <span class="enea-test-option__letter">{{ letter }}.</span>
+            <span class="enea-test-option__label">{{ label }}</span>
+          </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+      {% endfor %}
+
+      <div class="enea-test-form__actions">
+        <button type="submit" class="btn-pill">Ver mi resultado</button>
+      </div>
+    </form>
+    {% endif %}
+
+    {% if show_result and result %}
+    {{ emailjs_payload|json_script:"enneagram-email-payload" }}
+    <div class="enea-test-result" id="resultado" tabindex="-1">
+      <h2 class="enea-test-result__heading">Resultado</h2>
+
+      <p class="enea-test-result__yours">
+        <span class="enea-test-result__pointer" aria-hidden="true">👉</span>
+        Tu eneatipo predominante:
+        <strong>Tipo {{ result.tipo_num }}: {{ result.tipo_name }}</strong>
+      </p>
+      {% if result.is_tie %}
+      <p class="enea-test-result__note">
+        Hubo empate entre varias letras con la misma cantidad de respuestas.
+        Mostramos el primer tipo según el conteo; en una sesión se profundiza el mapa completo.
+      </p>
+      {% endif %}
+
+      <p class="enea-test-result__intro"><span class="enea-test-result__pointer" aria-hidden="true">👉</span> La letra que más elegiste indica tu eneatipo predominante:</p>
+      <ul class="enea-test-result__map">
+        {% for letter, pair in enneatype_by_letter.items %}
+        <li class="enea-test-result__map-item{% if letter == result.primary_letter %} is-match{% endif %}">
+          <span class="enea-test-result__letter">{{ letter }}</span>
+          → Tipo {{ pair.0 }}: {{ pair.1 }}
+        </li>
+        {% endfor %}
+      </ul>
+
+      <div class="enea-test-result__reflection">
+        <p class="enea-test-result__reflection-lead">No es solo «qué sos», sino:</p>
+        <ul class="enea-test-result__reflection-list">
+          <li><span class="enea-test-result__pointer" aria-hidden="true">👉</span> qué evitás sentir</li>
+          <li><span class="enea-test-result__pointer" aria-hidden="true">👉</span> qué estrategia aprendiste para sobrevivir emocionalmente</li>
+        </ul>
+        <p class="enea-test-result__hard">Transformar este patrón sola es difícil.</p>
+        <p class="enea-test-result__because">
+          Porque no es racional.<br>
+          Es emocional, profundo y automático.
+        </p>
+      </div>
+
+      <div class="enea-test-result__cta">
+        <p>Si querés el test completo para saber tu mapa profundo en tan solo una sesión:</p>
+        <button
+          type="button"
+          class="btn-pill js-emailjs-full-test"
+          data-nombre="{{ nombre|default:'' }}"
+          data-email="{{ email|default:'' }}"
+          data-tipo="{{ result.tipo_num }}"
+          data-tipo-nombre="{{ result.tipo_name }}"
+        >Envíame el test completo</button>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
