@@ -38,12 +38,34 @@
   </div>
 </section>
 
-<section class="section-blog-cta" aria-labelledby="titulo-blog-cta">
+<section class="section-blog-cta" id="novedades" aria-labelledby="titulo-blog-cta">
   <div class="section-blog-cta__bg" aria-hidden="true"></div>
   <div class="section-blog-cta__inner">
     <h2 id="titulo-blog-cta">¿Te gustaría saber más sobre este mundo?</h2>
     <p>Lee noticias y novedades sobre lo que es la Psicología Integrativa Transpersonal, todo en un solo lugar.</p>
-    <a class="btn-pill" href="{{ url_blog }}" target="_blank" rel="noopener noreferrer">¡En mi blog!</a>
+    {% if home_news %}
+    <div class="home-novedades-grid">
+      {% for item in home_news %}
+      <article class="home-novedad-card">
+        {% if item.image_url %}
+        <div class="home-novedad-card__image" style="background-image: url('{{ item.image_url }}');"></div>
+        {% else %}
+        <div class="home-novedad-card__image home-novedad-card__image--placeholder"></div>
+        {% endif %}
+        <div class="home-novedad-card__body">
+          <h3>{{ item.title }}</h3>
+          <time datetime="{{ item.date|date:'Y-m-d' }}">{{ item.date|date:"j \\d\\e F \\d\\e Y" }}</time>
+          <p>{{ item.excerpt|truncatewords:24 }}</p>
+          <a href="{% url 'web:news_detail' item.slug %}">Leer más</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div class="section-blog-cta__actions">
+      <a class="btn-pill" href="{% url 'web:news_list' %}">Ver todas las novedades</a>
+      <a class="btn-pill btn-pill--outline" href="{{ url_blog }}" target="_blank" rel="noopener noreferrer">¡En mi blog!</a>
+    </div>
   </div>
 </section>
 

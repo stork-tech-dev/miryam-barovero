@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Panel | Miryam Barovero{% endblock %}
+{% block body_class %}page-panel{% endblock %}
+
+{% block content %}
+<section class="section-panel" aria-labelledby="titulo-panel">
+  <div class="section-panel__inner">
+    <header class="section-panel__header">
+      <span class="panel-tag">Panel</span>
+      <h1 id="titulo-panel" class="section-panel__title">Administración de contenidos</h1>
+      <p class="section-panel__lead">Desde acá podés gestionar el contenido editable del sitio.</p>
+    </header>
+    <div class="panel-grid">
+      {% for item in admin_links %}
+      <a href="{{ item.url }}" class="panel-card">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.description }}</p>
+        <span class="panel-card-link">Abrir módulo →</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

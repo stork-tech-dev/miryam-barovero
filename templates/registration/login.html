@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Ingreso | Miryam Barovero{% endblock %}
+{% block body_class %}page-panel page-login{% endblock %}
+
+{% block content %}
+<section class="auth-login" aria-labelledby="titulo-login">
+  <div class="auth-login__inner">
+    <div class="auth-card auth-login__card">
+      <header class="auth-login__header">
+        <span class="panel-tag">Acceso</span>
+        <h1 id="titulo-login" class="auth-login__title">
+          <span class="auth-login__title-main">Ingreso</span>
+          <span class="auth-login__title-sub">de administración</span>
+        </h1>
+        <p class="auth-login__lead">Accedé para gestionar las novedades y los retiros del sitio.</p>
+      </header>
+      <form method="post" class="auth-form auth-login__form" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+        <div class="form-message form-message--error">{{ form.non_field_errors }}</div>
+        {% endif %}
+        <div class="form-group">
+          <label for="{{ form.username.id_for_label }}">Usuario</label>
+          {{ form.username }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.password.id_for_label }}">Contraseña</label>
+          {{ form.password }}
+        </div>
+        <button type="submit" class="btn-pill auth-login__submit">Ingresar</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

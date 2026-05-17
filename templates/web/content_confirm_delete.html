@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section_title }} | Panel{% endblock %}
+{% block body_class %}page-panel{% endblock %}
+
+{% block content %}
+<section class="section-panel" aria-labelledby="titulo-panel-delete">
+  <div class="section-panel__inner">
+    <div class="auth-card">
+      <header class="section-panel__header">
+        <span class="panel-tag">Panel</span>
+        <h1 id="titulo-panel-delete" class="section-panel__title">{{ section_title }}</h1>
+        <p class="section-panel__lead">{{ section_description }}</p>
+      </header>
+
+      <p class="delete-message">Vas a eliminar: <strong>{{ object }}</strong></p>
+
+      <form method="post" class="delete-form">
+        {% csrf_token %}
+        <div class="form-actions">
+          <a href="{{ list_url }}" class="btn-pill btn-pill--outline">Cancelar</a>
+          <button type="submit" class="btn-pill btn-pill--danger btn-submit">Confirmar eliminación</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

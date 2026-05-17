@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section_title }} | Panel{% endblock %}
+{% block body_class %}page-panel{% endblock %}
+
+{% block content %}
+<section class="section-panel" aria-labelledby="titulo-panel-modulo">
+  <div class="section-panel__inner">
+    <header class="section-panel__header">
+      <span class="panel-tag">Panel</span>
+      <h1 id="titulo-panel-modulo" class="section-panel__title">{{ section_title }}</h1>
+      <p class="section-panel__lead">{{ section_description }}</p>
+    </header>
+
+    <div class="panel-toolbar">
+      <a href="{{ panel_url }}" class="btn-pill btn-pill--outline">Volver al panel</a>
+      {% if create_url %}
+      <a href="{{ create_url }}" class="btn-pill">Crear nuevo</a>
+      {% endif %}
+    </div>
+
+    <div class="crud-grid">
+      {% for item in item_cards %}
+      <article class="crud-card">
+        <div class="crud-card-header">
+          <div>
+            <h2>{{ item.title }}</h2>
+            <p class="crud-card-order">Orden: {{ item.order }}</p>
+          </div>
+          <span class="crud-status{% if item.is_active %} is-active{% endif %}">
+            {% if item.is_active %}Activo{% else %}Inactivo{% endif %}
+          </span>
+        </div>
+        {% if item.image_url %}
+        <div class="crud-card-preview">
+          <img src="{{ item.image_url }}" alt="{{ item.title }}">
+        </div>
+        {% endif %}
+        <div class="crud-card-body">
+          {% for line in item.meta %}
+          <p>{{ line }}</p>
+          {% endfor %}
+        </div>
+        <div class="crud-card-actions">
+          <a href="{{ item.edit_url }}" class="btn-pill">Editar</a>
+          {% if item.delete_url %}
+          <a href="{{ item.delete_url }}" class="btn-pill btn-pill--danger">Eliminar</a>
+          {% endif %}
+        </div>
+      </article>
+      {% empty %}
+      <div class="auth-card">
+        <p>{{ empty_message|default:"No hay elementos cargados todavía." }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

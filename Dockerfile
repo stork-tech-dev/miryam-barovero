@@ -15,6 +15,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN chmod +x ./entrypoint.sh ./entrypoint-dev.sh 2>/dev/null || true
+RUN chmod +x ./entrypoint.sh ./entrypoint-dev.sh ./ensure_superuser.sh 2>/dev/null || true
 
 CMD ["./entrypoint.sh"]

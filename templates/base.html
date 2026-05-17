@@ -25,7 +25,12 @@
           <li><a href="{% url 'web:eneagrama' %}" class="{% if nav_section == 'eneagrama' %}is-active{% endif %}">Eneagrama</a></li>
           <li><a href="{% url 'web:retiros' %}" class="{% if nav_section == 'retiros' %}is-active{% endif %}">Retiros</a></li>
           <li><a href="{% url 'web:sobre_mi' %}" class="{% if nav_section == 'sobre_mi' %}is-active{% endif %}">Sobre mí</a></li>
+          <li><a href="{% url 'web:news_list' %}" class="{% if nav_section == 'novedades' %}is-active{% endif %}">Novedades</a></li>
           <li><a href="{% url 'web:contactame' %}" class="{% if nav_section == 'contactame' %}is-active{% endif %}">Contactame</a></li>
+          {% if user.is_staff or user.is_superuser %}
+          <li><a href="{% url 'web:panel' %}" class="{% if nav_section == 'admin' %}is-active{% endif %}">Admin</a></li>
+          <li><a href="{% url 'web:logout' %}">Cerrar sesión</a></li>
+          {% endif %}
         </ul>
       </nav>
     </div>

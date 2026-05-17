@@ -28,6 +28,10 @@ services:
       - SECRET_KEY=${SECRET_KEY:-django-insecure-miryam-dev-key}
       - DEBUG=${DEBUG:-True}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
+      - CREATE_SUPERUSER=${CREATE_SUPERUSER:-true}
+      - SUPERUSER_USERNAME=${SUPERUSER_USERNAME:-admin}
+      - SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD:-admin123}
+      - SUPERUSER_EMAIL=${SUPERUSER_EMAIL:-admin@miryambarovero.com.ar}
     volumes:
       - .:/code
     depends_on:

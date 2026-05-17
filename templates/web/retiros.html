@@ -69,23 +69,33 @@
     <p class="section-proximos-retiros__sublead">Cada encuentro tendrá su propio enfoque y temática.</p>
 
     <div class="proximos-grid">
-      <article class="proximo-card" aria-label="Próximo retiro 1">
-        <div class="proximo-card__media" aria-hidden="true"></div>
-      </article>
-
-      <article class="proximo-card proximo-card--featured" aria-label="Retiro destacado">
-        <div class="proximo-card__media" aria-hidden="true"></div>
+      {% for retreat in proximos_retiros %}
+      {% if retreat %}
+      <a
+        href="{% url 'web:retreat_detail' retreat.slug %}"
+        class="proximo-card proximo-card--link"
+        aria-label="Ver retiro {{ retreat.title }}"
+      >
+        <div
+          class="proximo-card__media{% if retreat.image %} proximo-card__media--photo{% endif %}"
+          {% if retreat.image %}style="background-image: url('{{ retreat.image.url }}');"{% endif %}
+          aria-hidden="true"
+        ></div>
         <div class="proximo-card__overlay">
           <p class="proximo-card__kicker">Retiro:</p>
-          <h3 class="proximo-card__title">Fuerza interna</h3>
-          <p class="proximo-card__text">Espacio reservado para la descripción del retiro. Luego se reemplaza por contenido dinámico.</p>
-          <a class="proximo-card__cta" href="#">Inscribirme</a>
+          <h3 class="proximo-card__title" title="{{ retreat.title }}">{{ retreat.title }}</h3>
+          {% if retreat.description %}
+          <p class="proximo-card__text">{{ retreat.description|truncatewords:18 }}</p>
+          {% endif %}
+          <span class="proximo-card__cta">Inscribirme</span>
         </div>
-      </article>
-
-      <article class="proximo-card" aria-label="Próximo retiro 2">
+      </a>
+      {% else %}
+      <div class="proximo-card proximo-card--empty" aria-hidden="true">
         <div class="proximo-card__media" aria-hidden="true"></div>
-      </article>
+      </div>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>

@@ -16,7 +16,7 @@
       o formarte en Eneagrama Integrativo, estoy acá para<br>
       acompañarte. Contactame.
     </p>
-    <form class="section-contacto__form section-contactame__form js-emailjs-contact" method="post" action="#" novalidate>
+    <form id="form-contactame" class="section-contacto__form section-contactame__form js-emailjs-contact" method="post" action="#" novalidate>
       <div class="section-contacto__row section-contacto__row--split">
         <label class="section-contacto__wrap">
           <span class="section-contacto__lab">Nombre</span>
@@ -36,7 +36,7 @@
       <div class="section-contacto__row">
         <label class="section-contacto__wrap section-contacto__wrap--textarea">
           <span class="section-contacto__lab">Consulta</span>
-          <textarea class="section-contacto__control section-contacto__textarea" name="consulta" id="id_contactame_consulta" required rows="6" maxlength="4000"></textarea>
+          <textarea class="section-contacto__control section-contacto__textarea" name="consulta" id="id_contactame_consulta" required rows="6" maxlength="4000">{% if contact_prefill_consulta %}{{ contact_prefill_consulta }}{% endif %}</textarea>
         </label>
       </div>
       <div class="section-contacto__actions">
@@ -45,4 +45,18 @@
     </form>
   </div>
 </section>
+{% if contact_prefill_consulta %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var field = document.getElementById("id_contactame_consulta");
+  var form = document.getElementById("form-contactame");
+  if (form) {
+    form.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  if (field) {
+    field.focus();
+  }
+});
+</script>
+{% endif %}
 {% endblock %}

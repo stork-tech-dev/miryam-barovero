@@ -45,8 +45,12 @@ class HomeView(TemplateView):
     template_name = "web/home.html"
 
     def get_context_data(self, **kwargs):
+        from web.news_views import get_news
+
         ctx = super().get_context_data(**kwargs)
         ctx["nav_section"] = "inicio"
+        news = get_news()
+        ctx["home_news"] = [item for item in news if item.get("show_on_home", True)][:3]
         return ctx
 
 
@@ -112,8 +116,11 @@ class RetirosView(TemplateView):
     template_name = "web/retiros.html"
 
     def get_context_data(self, **kwargs):
+        from web.retreat_views import get_proximos_retiros
+
         ctx = super().get_context_data(**kwargs)
         ctx["nav_section"] = "retiros"
+        ctx["proximos_retiros"] = get_proximos_retiros()
         return ctx
 
 
@@ -132,4 +139,13 @@ class ContactameView(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["nav_section"] = "contactame"
+        consulta = (self.request.GET.get("consulta") or "").strip()
+        inscripcion = (self.request.GET.get("inscripcion") or "").strip()
+        if consulta:
+            ctx["contact_prefill_consulta"] = consulta
+        elif inscripcion:
+            ctx["contact_prefill_consulta"] = (
+                f"Hola, me gustaría inscribirme al retiro «{inscripcion}».\n\n"
+                "Quedo a la espera de más información. ¡Gracias!"
+            )
         return ctx

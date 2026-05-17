@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ retreat.title }} | Retiros | Miryam Barovero{% endblock %}
+{% block body_class %}page-retiros page-retiro-detail{% endblock %}
+
+{% block content %}
+<section class="section-retiro-detail" aria-labelledby="titulo-retiro-detalle">
+  <div class="section-retiro-detail__inner">
+    <article class="retiro-detail">
+      {% if retreat.image %}
+      <div class="retiro-detail__image" style="background-image: url('{{ retreat.image.url }}');"></div>
+      {% else %}
+      <div class="retiro-detail__image retiro-detail__image--placeholder"></div>
+      {% endif %}
+      <div class="retiro-detail__content">
+        <p class="retiro-detail__kicker">Retiro</p>
+        <h1 id="titulo-retiro-detalle" class="retiro-detail__title">{{ retreat.title }}</h1>
+        <div class="retiro-detail__body">
+          {% if retreat.body %}
+            {{ retreat.body|linebreaks }}
+          {% elif retreat.description %}
+            <p>{{ retreat.description }}</p>
+          {% endif %}
+        </div>
+        <div class="retiro-detail__actions">
+          <a
+            class="btn-pill"
+            href="{{ retreat.get_inscripcion_contact_url }}"
+            {% if retreat.signup_url %}target="_blank" rel="noopener noreferrer"{% endif %}
+          >Inscribirme</a>
+          <a href="{% url 'web:retiros' %}#titulo-proximos-retiros" class="btn-pill btn-pill--outline">Volver a retiros</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+{% endblock %}

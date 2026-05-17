@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Novedades | Miryam Barovero{% endblock %}
+{% block body_class %}page-novedades{% endblock %}
+
+{% block content %}
+<section class="section-novedades" aria-labelledby="titulo-novedades">
+  <div class="section-novedades__inner">
+    <header class="section-novedades__header">
+      <h1 id="titulo-novedades" class="section-novedades__title">Novedades</h1>
+    </header>
+
+    <div class="novedades-grid">
+      {% for item in news_items %}
+      <article class="novedad-card">
+        {% if item.image_url %}
+          {% if item.image_is_media %}
+          <div class="novedad-card-image" style="background-image: url('{{ item.image_url }}');"></div>
+          {% else %}
+          <div class="novedad-card-image" style="background-image: url('{% static item.image_url %}');"></div>
+          {% endif %}
+        {% else %}
+        <div class="novedad-card-image novedad-card-image--placeholder"></div>
+        {% endif %}
+        <div class="novedad-card-content">
+          <h2>{{ item.title }}</h2>
+          <time class="novedad-date" datetime="{{ item.date|date:'Y-m-d' }}">{{ item.date|date:"j \\d\\e F \\d\\e Y" }}</time>
+          <p>{% if item.excerpt %}{{ item.excerpt }}{% else %}{{ item.body|truncatewords:40 }}{% endif %}</p>
+          <a href="{% url 'web:news_detail' item.slug %}" class="novedad-link">Leer más</a>
+        </div>
+      </article>
+      {% empty %}
+      <p class="novedades-empty">Pronto vas a encontrar novedades acá.</p>
+      {% endfor %}
+    </div>
+
+    <div class="novedades-cta">
+      <a href="{% url 'web:home' %}" class="btn-pill">Volver al inicio</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section_title }} | Panel{% endblock %}
+{% block body_class %}page-panel{% endblock %}
+
+{% block content %}
+<section class="section-panel" aria-labelledby="titulo-panel-form">
+  <div class="section-panel__inner">
+    <div class="auth-card auth-card-wide panel-form-card">
+      <header class="section-panel__header panel-form-header">
+        <span class="panel-tag">Panel</span>
+        <h1 id="titulo-panel-form" class="section-panel__title">{{ section_title }}</h1>
+        <p class="section-panel__lead">{{ section_description }}</p>
+        <div class="panel-toolbar panel-toolbar--sides">
+          <a href="{{ list_url }}" class="btn-pill btn-pill--outline">Volver al listado</a>
+          <a href="{{ panel_url }}" class="btn-pill btn-pill--outline">Panel</a>
+        </div>
+      </header>
+
+      <form method="post" enctype="multipart/form-data" class="auth-form auth-form-grid content-form">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group form-group--{{ field.name }}{% if field.field.widget.input_type == 'checkbox' %} form-group-checkbox{% endif %}{% if field.errors %} form-group--error{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {% if field.name == 'image' and form.instance.image %}
+          <div class="image-field-with-preview">
+            <div class="image-preview-wrap" data-preview-wrap>
+              <img src="{{ form.instance.image.url }}" alt="" class="image-preview-img">
+              <button type="button" class="image-remove-btn" aria-label="Quitar imagen" data-remove-image>×</button>
+            </div>
+            <div class="image-clear-and-upload" data-clear-upload hidden>
+              <p class="image-cleared-msg">Imagen quitada. Podés cargar una nueva abajo.</p>
+            </div>
+            <div class="image-current-and-input">
+              {{ field }}
+            </div>
+          </div>
+          {% else %}
+          {{ field }}
+          {% endif %}
+          {% if field.help_text %}
+          <small class="form-help">{{ field.help_text }}</small>
+          {% endif %}
+          {% if field.errors %}
+          <div class="form-error">{{ field.errors|join:", " }}</div>
+          {% endif %}
+        </div>
+        {% endfor %}
+        <div class="form-actions">
+          <button type="submit" class="btn-pill btn-submit">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+(function() {
+  var wrap = document.querySelector('[data-preview-wrap]');
+  var clearUpload = document.querySelector('[data-clear-upload]');
+  var removeBtn = document.querySelector('[data-remove-image]');
+  if (!wrap || !removeBtn) return;
+  var fieldBlock = wrap.closest('.image-field-with-preview');
+  var container = fieldBlock ? fieldBlock.querySelector('.image-current-and-input') : null;
+  var clearCheckbox = container ? container.querySelector('input[type="checkbox"][name$="-clear"]') : null;
+  var fileInput = container ? container.querySelector('input[type="file"]') : null;
+  removeBtn.addEventListener('click', function() {
+    if (clearCheckbox) clearCheckbox.checked = true;
+    wrap.style.display = 'none';
+    if (clearUpload) clearUpload.hidden = false;
+  });
+  if (fileInput && clearCheckbox) {
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files && fileInput.files.length) {
+        clearCheckbox.checked = false;
+      }
+    });
+  }
+})();
+</script>
+{% endblock %}

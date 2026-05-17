@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ item.title }} | Novedades | Miryam Barovero{% endblock %}
+{% block body_class %}page-novedades{% endblock %}
+
+{% block content %}
+<section class="section-novedades" aria-labelledby="titulo-novedad-detalle">
+  <div class="section-novedades__inner">
+    <article class="novedad-detail">
+      {% if item.image_url %}
+        {% if item.image_is_media %}
+        <div class="novedad-detail-image" style="background-image: url('{{ item.image_url }}');"></div>
+        {% else %}
+        <div class="novedad-detail-image" style="background-image: url('{% static item.image_url %}');"></div>
+        {% endif %}
+      {% else %}
+      <div class="novedad-detail-image novedad-detail-image--placeholder"></div>
+      {% endif %}
+      <div class="novedad-detail-content">
+        <h1 id="titulo-novedad-detalle" class="novedad-detail-title">{{ item.title }}</h1>
+        <time class="novedad-date" datetime="{{ item.date|date:'Y-m-d' }}">{{ item.date|date:"j \\d\\e F \\d\\e Y" }}</time>
+        <div class="novedad-detail-body">
+          {% if item.body %}
+            {{ item.body|linebreaks }}
+          {% else %}
+            <p>{{ item.excerpt }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    <div class="novedades-cta">
+      <a href="{% url 'web:news_list' %}" class="btn-pill">Volver a novedades</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
