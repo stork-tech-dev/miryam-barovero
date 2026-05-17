@@ -3695,11 +3695,14 @@ a {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: clamp(1rem, 2.5vw, 1.5rem);
+  align-items: stretch;
 }
 
 .novedad-card {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: 0;
   overflow: hidden;
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.95);
@@ -3734,6 +3737,11 @@ a {
   text-transform: uppercase;
   color: #eb5d27;
   line-height: 1.12;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
 }
 
 .novedad-date {
@@ -3744,14 +3752,20 @@ a {
 }
 
 .novedad-card-content p {
-  flex: 1;
   margin: 0 0 1rem;
   font-size: clamp(0.9rem, 1.35vw, 1rem);
   line-height: 1.55;
   color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .novedad-link {
+  margin-top: auto;
   font-weight: 700;
   font-size: 0.82rem;
   letter-spacing: 0.08em;

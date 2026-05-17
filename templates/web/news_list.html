@@ -26,7 +26,7 @@
         <div class="novedad-card-content">
           <h2>{{ item.title }}</h2>
           <time class="novedad-date" datetime="{{ item.date|date:'Y-m-d' }}">{{ item.date|date:"j \\d\\e F \\d\\e Y" }}</time>
-          <p>{% if item.excerpt %}{{ item.excerpt }}{% else %}{{ item.body|truncatewords:40 }}{% endif %}</p>
+          <p>{% if item.excerpt %}{{ item.excerpt|truncatewords:28 }}{% else %}{{ item.body|truncatewords:28 }}{% endif %}</p>
           <a href="{% url 'web:news_detail' item.slug %}" class="novedad-link">Leer más</a>
         </div>
       </article>
