@@ -45,12 +45,8 @@ class HomeView(TemplateView):
     template_name = "web/home.html"
 
     def get_context_data(self, **kwargs):
-        from web.news_views import get_news
-
         ctx = super().get_context_data(**kwargs)
         ctx["nav_section"] = "inicio"
-        news = get_news()
-        ctx["home_news"] = [item for item in news if item.get("show_on_home", True)][:3]
         return ctx
 
 
